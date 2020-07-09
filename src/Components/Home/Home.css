@@ -1,0 +1,104 @@
+.HomeContanier{
+  background-color: #edf0f5;
+}
+.HomeGrid{
+  padding-right: 50px;
+  padding-top: 20px;
+}
+.ImageHome{
+  display: flex;
+  justify-content:flex-end;
+  align-items:flex-end;
+  padding-left: 740px;
+  padding-top:100px;
+
+}
+
+.HomeButton{
+  padding-top: 20px;
+  right: 40px;
+  background-color: #edf0f5;
+  border: none;
+  font-size: 22px;
+  font-weight: bold;
+  color: #59595c;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.HomeButton1{
+  position: absolute;
+  flex-direction: column;
+  padding-top: 8px;
+  right:169px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #59595c;
+  font-style: normal;
+}
+.HomeButton2{
+  position: absolute;
+  flex-direction: column;
+  padding-top: 8px;
+  right:265px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #59595c;
+  font-style: normal;
+}
+
+.HomeButton:hover {
+  color: white;
+}
+.HomeWasfa{
+  font-size: 40px;
+  color: #3a3a3a;
+  font-weight: bold;
+  position: absolute;
+  flex-direction: column;
+  padding-left:150px;
+  top: 220px;
+  
+}
+
+.WasfaP{
+  font-size: 22px;
+  color: #59595c;
+  font-style: normal;
+  font-family: Arial, Helvetica, sans-serif;
+
+
+}
+.WasfaP1{
+  position: absolute;
+  flex-direction: column;
+  padding-left:150px;
+  top: 290px;
+}
+.WasfaP2{
+  position: absolute;
+  flex-direction: column;
+  padding-left:150px;
+  top: 330px;
+}
+.WasfaP3{
+  position: absolute;
+  flex-direction: column;
+  padding-left:150px;
+  top: 370px;
+}
+.HomeExplore{
+  position: absolute;
+  flex-direction: column;
+  top: 450px;
+  left:140px;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #3a3a3a;
+  margin: 10px;
+}
+.HomeExplore:hover{
+  background-color: #d9d9d9;
+  color:#3a3a3a;
+}
