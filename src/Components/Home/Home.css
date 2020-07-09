@@ -25,6 +25,26 @@
   font-style: normal;
   font-family: Arial, Helvetica, sans-serif;
 }
+.HomeButton1{
+  position: absolute;
+  flex-direction: column;
+  padding-top: 8px;
+  right:169px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #59595c;
+  font-style: normal;
+}
+.HomeButton2{
+  position: absolute;
+  flex-direction: column;
+  padding-top: 8px;
+  right:265px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #59595c;
+  font-style: normal;
+}
 
 .HomeButton:hover {
   color: white;
