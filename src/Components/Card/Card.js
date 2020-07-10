@@ -27,7 +27,7 @@ export default function MediaCard() {
         <CardMedia
           className='CardImage'
           image={
-            'https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
+            'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
           }
         />
         <h1 className='Cardtitle'>bancake</h1>

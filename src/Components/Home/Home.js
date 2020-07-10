@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import history from '../../History';
+import { useHistory } from 'react-router-dom';
 
 import './Home.css';
 import HomeImg from '../images/Home (1).png';
@@ -48,7 +49,11 @@ const useStyles = makeStyles(theme => ({
 
 const Home = () => {
   const classes = useStyles();
+  let history = useHistory();
 
+  function handleClick() {
+    history.push('/explore');
+  }
   return (
     <div className='HomeContanier'>
       <Grid
@@ -81,7 +86,7 @@ const Home = () => {
         <p className='WasfaP3'>cheves to share theirs </p>
       </div>
       <Button
-        onClick={() => history.push('/explore')}
+        onClick={handleClick}
         color='primary'
         className={classes.HomeExplore}
       >
