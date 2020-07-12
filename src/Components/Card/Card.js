@@ -16,7 +16,8 @@ const defaultProps = {
   style: {
     width: '260px',
     height: '290px',
-    borderRadius: '20px'
+    borderRadius: '20px',
+    marginLeft: '55px'
   }
 };
 

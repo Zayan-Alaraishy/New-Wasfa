@@ -1,0 +1,48 @@
+.AddMealContaner{
+  background-color: #edf0f5;
+  float: left;
+}
+
+.cardAddMeal{
+  float: left;
+  margin: 30px;
+}
+
+
+.uplodeimgImg{
+  width:auto;
+  height: 200px;
+  border-radius: 5px;
+  margin: 10px;
+  border-color: #3a3a3a;
+  border:solid
+}
+.AddGrid1{
+  padding-right:145px
+}
+.AddGrid2{
+  padding-right:100px
+}
+
+.vl {
+  border-left: 2px solid #3a3a3a;
+  height: 300px;
+  position: absolute;
+  left:1000px;
+}
+.MealTypeText{
+  padding-right:50px;
+  padding-left: 50px;
+  font-weight: bold;
+  color: #757575;
+}
+.gridMealType{
+  padding-right:200px;
+}
+
+.inputAdd-image{
+  margin:20px;
+  border:none;
+  padding-left: 50px;
+  color: #757575;
+}

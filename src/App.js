@@ -4,6 +4,7 @@ import Home from './Components/Home/Home';
 import Explore from './Components/Home/Explore';
 import history from './History';
 import Tutorial from './Components/Tutorial/Tutorial';
+import AddMeal from './Components/Cheif/AddMeal';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -16,7 +17,10 @@ function App() {
             <Home />
           </Route>
           <Route path='/explore'>
-            <Explore />
+            <AddMeal />
+          </Route>
+          <Route path='/addmeal'>
+            <AddMeal />
           </Route>
           <Route path='/tutorial'>
             <Tutorial />
