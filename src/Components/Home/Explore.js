@@ -11,13 +11,13 @@ const theme = createMuiTheme({
   palette: {
     primary: {
       light: '#757ce8',
-      main: '#59595c',
+      main: '#3a3a3a',
       dark: '#757ce8',
       contrastText: '#757ce8'
     },
     secondary: {
       light: '#ff7961',
-      main: '#f44336',
+      main: '#fff',
       dark: '#ba000d',
       contrastText: '#000'
     }
@@ -29,27 +29,27 @@ const Explore = () => {
       <ThemeProvider theme={theme}>
         <AppBar position='static' color='primary'>
           <Toolbar>
-            <Grid className='GridExploreBar'>
-              <img src={logo} className='exploreLogo' />
+            <Grid>
+              <img src={logo} className='Logo' />
             </Grid>
             <Grid item sm={11} xs={6} />
 
             <Button
               className='ExploreSignUpButton'
               onClick={() => history.push('/tutorial')}
+              color='secondary'
             >
               SignUp
             </Button>
           </Toolbar>
         </AppBar>
       </ThemeProvider>
-      <Grid>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-      </Grid>
+      {/* <text>Cheack our recipes :)</text> */}
+      <Card />
+      <Card />
+      <Card />
+      <Card />
+      <Card />
     </Grid>
   );
 };
