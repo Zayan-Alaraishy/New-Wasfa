@@ -6,6 +6,8 @@ import history from './History';
 import Tutorial from './Components/Tutorial/Tutorial';
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import SignInSide from './Components/Accounts/signin';
+import SignUp from './Components/Accounts/signup';
 
 function App() {
   return (
@@ -20,6 +22,12 @@ function App() {
           </Route>
           <Route path='/tutorial'>
             <Tutorial />
+          </Route>
+          <Route path='/signup'>
+            <SignUp />
+          </Route>
+          <Route path='/signin'>
+            <SignInSide />
           </Route>
         </Switch>
       </div>

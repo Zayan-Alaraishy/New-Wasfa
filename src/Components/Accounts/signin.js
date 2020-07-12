@@ -46,27 +46,14 @@ const useStyles = makeStyles(theme => ({
   },
   submit: {
     margin: theme.spacing(3, 0, 2)
-  },
-  text1: {
-    paddingTop: 12,
-    paddingRight: 20,
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: '#59595c'
-  },
-  text2: {
-    paddingTop: 12,
-    fontSize: 18,
-    color: '#59595c',
-    paddingRight: 20
   }
 }));
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#bbb',
+      light: '#757ce8',
       main: '#59595c',
-      dark: '#59595c',
+      dark: '#bbb',
       contrastText: '#ffffff'
     },
     secondary: {
@@ -78,46 +65,56 @@ const theme = createMuiTheme({
   }
 });
 
-export default function SignUpSide() {
+export default function SignInSide() {
   const classes = useStyles();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState('');
-  const [type, setType] = useState('');
+  const [loggedType, setloggedType] = useState('');
 
-  const addUser = e => {
-    e.preventDefault();
-
-    console.log(email, password, type, 'email,password');
-    const db = firebase.firestore();
-
+  const signin = () => {
+    setloggedType('chef');
+    console.log(loggedType);
+    console.log(email, password);
     firebase
       .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        let user = firebase.auth().currentUser;
+      .signInWithEmailAndPassword(email, password)
+      .then(res => {
+        console.log(res.user.uid);
+
+        const db = firebase.firestore();
         db.collection('users')
-          .doc(user.uid)
-          .set({
-            Email: email,
-            Username: username,
-            userType: type
-          })
-          .then(docRef => {
-            if (type == 'chef') {
-              // this.props.history.push('/chef');
-              console.log('to chef');
-            } else {
-              // this.props.history.push('/learner');
-              console.log('to learner');
-            }
+          .where('Email', '==', email)
+          .get()
+          .then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+              // doc.data() is never undefined for query doc snapshots
+              console.log(doc.id, ' => ', doc.data());
+              console.log(doc.data().userType);
+              setloggedType(doc.data().userType);
+              if (doc.data().userType == 'chef') {
+                // this.props.history.push('/chef');
+                console.log('to chef');
+              } else {
+                // this.props.history.push('/learner');
+                console.log('to learner');
+              }
+            });
           })
           .catch(function(error) {
-            console.error('Error adding document: ', error);
+            console.log('Error getting documents: ', error);
           });
-      })
 
-      .catch(function(error) {
+        // .then(docRef => {
+        //   if (loggedType == 'chef') {
+        //     // this.props.history.push('/chef');
+        //     console.log('to chef');
+        //   } else {
+        //     // this.props.history.push('/learner');
+        //     console.log('to learner');
+        //   }
+        // });
+      })
+      .catch(error => {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -138,8 +135,9 @@ export default function SignUpSide() {
               <LockOutlinedIcon />
             </Avatar>
             <Typography component='h1' variant='h5'>
-              Sign up to Wasfa
+              Sign in to Wasfa
             </Typography>
+            <h1>{loggedType}</h1>
             <form className={classes.form} noValidate>
               <TextField
                 variant='outlined'
@@ -161,21 +159,6 @@ export default function SignUpSide() {
                 margin='normal'
                 required
                 fullWidth
-                id='username'
-                label='Username'
-                name='username'
-                autoComplete='username'
-                autoFocus
-                value={username}
-                onChange={event => {
-                  setUsername(event.target.value);
-                }}
-              />
-              <TextField
-                variant='outlined'
-                margin='normal'
-                required
-                fullWidth
                 name='password'
                 label='Password'
                 type='password'
@@ -187,59 +170,23 @@ export default function SignUpSide() {
                 }}
               />
               <Grid container>
-                <text className={classes.text1}>Sign up as:</text>
-
-                <text className={classes.text2}>
-                  <input
-                    type='radio'
-                    name='type'
-                    defaultValue='option1'
-                    value='user'
-                    value={username}
-                    onChange={event => {
-                      setType(event.target.value);
-                    }}
-                  />
-                  Learner
-                </text>
-
-                <text className={classes.text2}>
-                  <input
-                    type='radio'
-                    name='type'
-                    defaultValue='option1'
-                    value='chef'
-                    onChange={event => {
-                      setType(event.target.value);
-                      return (
-                        <div>
-                          <h1> hello chef</h1>
-                        </div>
-                      );
-                    }}
-                  />
-                  Chef
-                </text>
+                <Link href='#' variant='body2'>
+                  Forgot password?
+                </Link>
               </Grid>
-
-              {/* <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            /> */}
               <Button
-                type='submit'
                 fullWidth
                 variant='contained'
                 color='primary'
                 className={classes.submit}
-                onClick={addUser}
+                onClick={signin}
               >
-                Sign up
+                Sign In
               </Button>
               <Grid container>
                 <Grid item>
                   <Link href='#' variant='body2'>
-                    Have you already an account? Sign in
+                    Don't have an account? Sign Up
                   </Link>
                 </Grid>
               </Grid>

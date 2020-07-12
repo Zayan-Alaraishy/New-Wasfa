@@ -1,0 +1,18 @@
+.container{
+  display: flex;
+  flex-direction: row;
+  background-color: #edf0f5; 
+
+}
+.pan{
+  width:500px; 
+  height: 100%;
+  padding: 100px
+
+}
+
+.form{
+  padding-left: 300px; 
+  padding-top: 50px; 
+  align-items: center;
+}

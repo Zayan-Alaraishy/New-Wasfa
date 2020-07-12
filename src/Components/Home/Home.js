@@ -60,11 +60,19 @@ const Home = () => {
         alignItems='flex-start'
       >
         <ThemeProvider theme={theme}>
-          <Button color='primary' className={classes.HomeButton}>
-            Log in
+          <Button
+            color='primary'
+            className={classes.HomeButton}
+            onClick={() => history.push('/signin')}
+          >
+            Sign in
           </Button>
           <text className='HomeButton1'>|</text>
-          <Button color='primary' className={classes.HomeButton}>
+          <Button
+            color='primary'
+            className={classes.HomeButton}
+            onClick={() => history.push('/signup')}
+          >
             Sign Up
           </Button>
           <text className='HomeButton2'>|</text>
