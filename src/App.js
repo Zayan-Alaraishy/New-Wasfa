@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
 import ChefHome from './Components/Cheif/ChefHome';
-
+import UserBar from './Components/user/userBar';
 function App() {
   return (
     <Router history={history}>
