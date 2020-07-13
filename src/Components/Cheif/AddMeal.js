@@ -13,7 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 
 import './AddMeal.css';
-import * as firebase from 'firebase';
+import { db, firebase } from '../../firebase';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -73,7 +73,7 @@ class AddMeal extends Component {
     eatTime: []
   };
   componentDidMount() {
-    const db = firebase.firestore();
+    // const db = firebase.firestore();
 
     db.collection('meals')
       .get()

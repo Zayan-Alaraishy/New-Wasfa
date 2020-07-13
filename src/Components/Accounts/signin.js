@@ -103,16 +103,6 @@ export default function SignInSide() {
           .catch(function(error) {
             console.log('Error getting documents: ', error);
           });
-
-        // .then(docRef => {
-        //   if (loggedType == 'chef') {
-        //     // this.props.history.push('/chef');
-        //     console.log('to chef');
-        //   } else {
-        //     // this.props.history.push('/learner');
-        //     console.log('to learner');
-        //   }
-        // });
       })
       .catch(error => {
         // Handle Errors here.
@@ -137,7 +127,7 @@ export default function SignInSide() {
             <Typography component='h1' variant='h5'>
               Sign in to Wasfa
             </Typography>
-            <h1>{loggedType}</h1>
+            {/* <h1>{loggedType}</h1> */}
             <form className={classes.form} noValidate>
               <TextField
                 variant='outlined'

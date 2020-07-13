@@ -199,6 +199,7 @@ export default function SignUpSide() {
                     onChange={event => {
                       setType(event.target.value);
                     }}
+                    required
                   />
                   Learner
                 </text>
@@ -217,6 +218,7 @@ export default function SignUpSide() {
                         </div>
                       );
                     }}
+                    required
                   />
                   Chef
                 </text>

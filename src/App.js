@@ -4,8 +4,7 @@ import Home from './Components/Home/Home';
 import Explore from './Components/Home/Explore';
 import history from './History';
 import Tutorial from './Components/Tutorial/Tutorial';
-import AddMeal from './Components/Cheif/AddMeal';
-
+// import AddMeal from './Components/Cheif/AddMeal';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
@@ -18,12 +17,12 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route path='/explore'>
+          {/* <Route path='/explore'>
             <AddMeal />
           </Route>
           <Route path='/addmeal'>
             <AddMeal />
-          </Route>
+          </Route> */}
           <Route path='/tutorial'>
             <Tutorial />
           </Route>
