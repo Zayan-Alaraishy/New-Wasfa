@@ -1,9 +1,9 @@
 import React from 'react';
 import Card from '../Card/Card';
 import './Explore.css';
-import { AppBar, Toolbar, Grid, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Grid, Button, Link } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
-import logo from '../images/logo.png';
+import logo from '../images/logo2.png';
 import history from '../../History';
 import { createMuiTheme } from '@material-ui/core/styles';
 

@@ -1,0 +1,55 @@
+.ExploreContaner{
+  background-color: #edf0f5;
+  float: left;
+  
+}
+
+.Logo{
+  width:35px;
+  height:35px;
+}
+
+.chef{
+  width: 32px;
+  height: 32px;
+}
+
+.chef:hover{
+  width: 33px;
+  height: 33px;
+}
+
+.LinkCategories{
+  color: #edf0f5;
+  text-decoration: none;
+padding-right:30px;
+}
+
+.LinkCategories:hover {
+  text-decoration: underline;
+}
+
+.add{
+  width:20px;
+  height: auto;
+}
+.add:hover {
+  width:21px;
+  height: auto;
+}
+
+.chefblack{
+  width:20px;
+  height: auto;
+  padding-right: 10px;
+}
+
+.Categories{
+  width:20px;
+  height: 10px;
+}
+
+.Categories:hover{
+  width:21px;
+  height: 10.3px;
+}

@@ -8,6 +8,7 @@ import AddMeal from './Components/Cheif/AddMeal';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
+import ChefHome from './Components/Cheif/ChefHome';
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
             <Home />
           </Route>
           <Route path='/explore'>
-            <Explore />
+            <ChefHome />
           </Route>
           <Route path='/addmeal'>
             <AddMeal />
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path='/signin'>
             <SignInSide />
+          </Route>
+          <Route path='chefhome'>
+            <ChefHome />
           </Route>
         </Switch>
       </div>

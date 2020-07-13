@@ -16,6 +16,7 @@ import image from '../images/pan2.png';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { db, firebase } from '../../firebase';
+import history from '../../History';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -175,7 +176,7 @@ export default function SignInSide() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href='#' variant='body2'>
+                  <Link onClick={() => history.push('/signup')} variant='body2'>
                     Don't have an account? Sign Up
                   </Link>
                 </Grid>
