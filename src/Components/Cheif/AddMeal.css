@@ -18,31 +18,108 @@
   border:solid
 }
 .AddGrid1{
-  padding-right:145px
-}
+  position: absolute;
+  left:787px;
+  top:150px;}
 .AddGrid2{
-  padding-right:100px
-}
+  position: absolute;
+  left:787px;
+  top:180px;}
+
+
+  .AddGrid3{
+position: absolute;
+  left:787px;
+  top:210px;
+  }
 
 .vl {
   border-left: 2px solid #3a3a3a;
-  height: 300px;
+  height: 170px;
   position: absolute;
-  left:1000px;
+  left:990px;
+  top:260px;
 }
-.MealTypeText{
-  padding-right:50px;
-  padding-left: 50px;
-  font-weight: bold;
-  color: #757575;
+.MealTypeText1{
+  position: absolute;
+  top:270px;
+  right:495px;
+  font-size: 18px;
 }
-.gridMealType{
-  padding-right:200px;
+
+.choose1{
+  font-size: 12px;
+  color:#757575;
+  position: absolute;
+  top:274px;
+  right:395px;
 }
+.MealTypeText2{
+  position: absolute;
+  top:270px;
+  right:265px;
+  font-size: 18px;}
 
 .inputAdd-image{
   margin:20px;
   border:none;
   padding-left: 50px;
   color: #757575;
+}
+.gridMealType1{
+  position: absolute;
+  top:295px;
+  right:400px;
+}
+.gridMealType2{
+  position: absolute;
+  top:320px;
+  right:417px;
+}
+.gridMealType3{
+  position: absolute;
+  top:345px;
+  right:397px;
+
+}.gridMealType4{
+  position: absolute;
+  top:370px;
+  right:415px;
+
+}.gridMealType5{
+  position: absolute;
+  top:395px;
+  right:412px;
+}
+
+.Occasions1{
+  position: absolute;
+  top:295px;
+  right:185px;
+}
+.Occasions2{
+  position: absolute;
+  top:320px;
+  right:170px;
+}
+.Occasions3{
+  position: absolute;
+  top:345px;
+  right:144px;
+}
+
+.Occasions4{
+  position: absolute;
+  top:370px;
+  right:134px;
+}
+
+.Occasions5{
+  position: absolute;
+  top:395px;
+  right:176px;
+}
+.AddButton{
+  position: absolute;
+  top:340px;
 }
