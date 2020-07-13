@@ -1,24 +1,23 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Card from '../Card/Card';
 import './Explore.css';
-import { AppBar, Toolbar, Grid, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Grid, Button, Link } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import logo from '../images/logo2.png';
 import history from '../../History';
 import { createMuiTheme } from '@material-ui/core/styles';
-
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#757ce8',
-      main: '#3a3a3a',
-      dark: '#757ce8',
-      contrastText: '#757ce8'
+      light: '#757CE8',
+      main: '#3A3A3A',
+      dark: '#757CE8',
+      contrastText: '#757CE8'
     },
     secondary: {
-      light: '#ff7961',
+      light: '#FF7961',
       main: '#fff',
-      dark: '#ba000d',
+      dark: '#BA000D',
       contrastText: '#000'
     }
   }
@@ -33,7 +32,6 @@ const Explore = () => {
               <img src={logo} className='Logo' />
             </Grid>
             <Grid item sm={11} xs={6} />
-
             <Button
               className='ExploreSignUpButton'
               onClick={() => history.push('/tutorial')}
@@ -45,13 +43,9 @@ const Explore = () => {
         </AppBar>
       </ThemeProvider>
       {/* <text>Cheack our recipes :)</text> */}
-      <Card />
-      <Card />
-      <Card />
-      <Card />
+      <h1>All recipes</h1>
       <Card />
     </Grid>
   );
 };
-
 export default Explore;
