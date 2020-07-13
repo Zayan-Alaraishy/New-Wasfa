@@ -13,7 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 
 import './AddMeal.css';
-import * as firebase from 'firebase';
+import { db, firebase } from '../../firebase';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -264,10 +264,6 @@ class AddMeal extends Component {
           </form>
 
           <Grid>
-            <img
-              src={this.state.url || 'http://via.placeholder.com/300x200'}
-              className='uplodeimgImg'
-            ></img>
             <button className='upload' onClick={this.handleUpload}>
               Upload
             </button>
@@ -278,41 +274,46 @@ class AddMeal extends Component {
           <Grid className='AddGrid1'>
             <text>Is it: </text>
             <Radio
-              value='meat'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'Meat' }}
+              name='veg'
+              onChange={this.handleChange}
+              value='Veg'
+              required
             />
             <text>meat meal</text>
             <Radio
-              value='lean'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'Lean' }}
+              name='veg'
+              onChange={this.handleChange}
+              value='non-veg'
+              required
             />
             <text>lean meal</text>
           </Grid>
           <Grid className='AddGrid2'>
             <text>Is it:</text>
             <Radio
-              value='western'
               color='default'
-              name='radio-button'
-              inputProps={{ 'aria-label': 'Western' }}
+              name='region'
+              onChange={this.handleChange}
+              value='westren'
+              required
             />
             <text>western</text>
             <Radio
-              value='eastern'
               color='default'
-              name='radio-button'
-              inputProps={{ 'aria-label': 'Eastern' }}
+              name='region'
+              onChange={this.handleChange}
+              value='eastren'
+              required
             />
             <text>eastern</text>
             <Radio
-              value='asian'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'Asian' }}
+              name='region'
+              onChange={this.handleChange}
+              value='asian'
+              required
             />
             <text>asian</text>
           </Grid>
@@ -321,125 +322,279 @@ class AddMeal extends Component {
             <Checkbox
               color='default'
               inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+              name='breakfast'
+              checked={this.state.checked}
+              onChange={this.handleChangeCheckboxTime}
+              required
             />
             <text>Breakfast</text>
             <Checkbox
               color='default'
               inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+              name='lunch'
+              checked={this.state.checked}
+              onChange={this.handleChangeCheckboxTime}
+              required
             />
             <text>Lunch</text>
             <Checkbox
               color='default'
               inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+              name='dinner'
+              checked={this.state.checked}
+              onChange={this.handleChangeCheckboxTime}
+              required
             />
             <text>Dinner</text>
             <Checkbox
               color='default'
               inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+              name='snak'
+              checked={this.state.checked}
+              onChange={this.handleChangeCheckboxTime}
+              required
             />
             <text>Snacks</text>
           </Grid>
-          <text className='MealTypeText'>Meal Type:</text>
-          <text className='MealTypeText'>Occasions:</text>
+          <text className='MealTypeText1'>Meal Type:</text>
+          <text className='choose1'>(choose only one)</text>
+          <text className='MealTypeText2'>Occasions:</text>
           <div class='vl'></div>
-          <Grid className='gridMealType'>
+          <Grid className='gridMealType1'>
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              value='Salads'
+              checked={this.state.salad}
+              onChange={this.handleChange}
+              required
             />
             <text>salad</text>
 
             <Radio
-              value='e'
               color='default'
               name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              value='Main meals'
+              checked={this.state.mainMeal}
+              onChange={this.handleChange}
+              required
             />
-            <text>salad</text>
+            <text>main meals</text>
           </Grid>{' '}
-          <Grid className='gridMealType'>
+          <Grid className='gridMealType2'>
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              value='Drinks'
+              checked={this.state.drink}
+              onChange={this.handleChange}
+              required
             />
-            <text>salad</text>
-
+            <text>Drinks</text>
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              value='Deserts'
+              type='radio'
+              checked={this.state.desert}
+              onChange={this.handleChange}
+              required
             />
-            <text>salad</text>
+            <text>Deserts</text>
           </Grid>{' '}
-          <Grid className='gridMealType'>
+          <Grid className='gridMealType3'>
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              checked={this.state.soap}
+              onChange={this.handleChange}
+              value='Soup'
+              required
             />
-            <text>salad</text>
+            <text>Soup</text>
 
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              checked={this.state.sandwich}
+              onChange={this.handleChange}
+              value='Sandwiches'
             />
-            <text>salad</text>
+            <text>Sandwiches</text>
           </Grid>{' '}
-          <Grid className='gridMealType'>
+          <Grid className='gridMealType4'>
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              value='Starters'
+              checked={this.state.starter}
+              onChange={this.handleChange}
+              required
             />
-            <text>salad</text>
-
+            <text>Street</text>
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              checked={this.state.pastry}
+              onChange={this.handleChange}
+              value='Pastries'
             />
-            <text>salad</text>
+            <text>Pastries</text>
           </Grid>{' '}
-          <Grid className='gridMealType'>
+          <Grid className='gridMealType5'>
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              value='sauce'
+              checked={this.state.sauce}
+              onChange={this.handleChange}
             />
-            <text>salad</text>
-
+            <text>sauce</text>
             <Radio
-              value='e'
               color='default'
-              name='radio-button-demo'
-              inputProps={{ 'aria-label': 'E' }}
               size='small'
+              name='clasifiction'
+              type='radio'
+              checked={this.state.seaFood}
+              onChange={this.handleChange}
+              value='Sea food'
             />
-            <text>salad</text>
+            <text>Sea food</text>
           </Grid>
-          <button className='Add' onClick={this.AddMeal}>
+          {/* .............................. */}
+          <Grid className='Occasions'>
+            <Grid className='Occasions1'>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='Birthday'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>Birthday</text>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='Picnic'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>Picnic</text>
+            </Grid>
+            <Grid className='Occasions2'>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='ThanksGiving'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>Thanksgiving</text>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='Eid'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>Eid</text>
+            </Grid>
+            <Grid className='Occasions3'>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='Ramadan'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>Ramadan</text>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='foodParty'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>party food</text>
+            </Grid>
+            <Grid className='Occasions4'>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='Entertaining'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>Entertaining</text>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='Camping'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>Camping</text>
+            </Grid>
+            <Grid className='Occasions5'>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='Chritmas'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>Christmas</text>
+              <Checkbox
+                color='default'
+                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                name='None'
+                size='small'
+                checked={this.state.checked}
+                onChange={this.handleChangeCheckboxTime}
+                required
+              />
+              <text>None</text>
+            </Grid>
+          </Grid>
+          <Button className='AddButton' onClick={this.AddMeal}>
             Add meal
-          </button>
+          </Button>
         </Card>
       </Grid>
     );
