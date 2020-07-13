@@ -149,6 +149,7 @@ class AddMeal extends Component {
   };
 
   handleUpload = () => {
+    console.log('working');
     const storage = firebase.storage();
     const { image } = this.state;
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
@@ -280,8 +281,8 @@ class AddMeal extends Component {
             <img
               src={this.state.url || 'http://via.placeholder.com/300x200'}
               alt='Uploaded images'
-              height='300'
-              width='400'
+              height='200'
+              width='auto'
             />
           </Grid>
         </Card>
@@ -294,6 +295,7 @@ class AddMeal extends Component {
               name='veg'
               onChange={this.handleChange}
               value='Veg'
+              checked={this.state.veg === 'Veg'}
               required
             />
             <text>meat meal</text>
@@ -302,6 +304,7 @@ class AddMeal extends Component {
               name='veg'
               onChange={this.handleChange}
               value='non-veg'
+              checked={this.state.veg === 'non-veg'}
               required
             />
             <text>lean meal</text>
@@ -313,6 +316,7 @@ class AddMeal extends Component {
               name='region'
               onChange={this.handleChange}
               value='westren'
+              checked={this.state.region === 'westren'}
               required
             />
             <text>western</text>
@@ -321,6 +325,7 @@ class AddMeal extends Component {
               name='region'
               onChange={this.handleChange}
               value='eastren'
+              checked={this.state.region === 'eastren'}
               required
             />
             <text>eastern</text>
@@ -329,6 +334,7 @@ class AddMeal extends Component {
               name='region'
               onChange={this.handleChange}
               value='asian'
+              checked={this.state.region === 'asian'}
               required
             />
             <text>asian</text>
@@ -385,6 +391,7 @@ class AddMeal extends Component {
               value='Salads'
               checked={this.state.salad}
               onChange={this.handleChange}
+              checked={this.state.clasifiction === 'Salads'}
               required
             />
             <text>salad</text>
@@ -398,6 +405,7 @@ class AddMeal extends Component {
               value='Main meals'
               checked={this.state.mainMeal}
               onChange={this.handleChange}
+              checked={this.state.clasifiction === 'Main meals'}
               required
             />
             <text>main meals</text>
@@ -411,6 +419,7 @@ class AddMeal extends Component {
               value='Drinks'
               checked={this.state.drink}
               onChange={this.handleChange}
+              checked={this.state.clasifiction === 'Drinks'}
               required
             />
             <text>Drinks</text>
@@ -422,6 +431,7 @@ class AddMeal extends Component {
               type='radio'
               checked={this.state.desert}
               onChange={this.handleChange}
+              checked={this.state.clasifiction === 'Deserts'}
               required
             />
             <text>Deserts</text>
@@ -434,6 +444,7 @@ class AddMeal extends Component {
               type='radio'
               checked={this.state.soap}
               onChange={this.handleChange}
+              checked={this.state.clasifiction === 'Soup'}
               value='Soup'
               required
             />
@@ -445,6 +456,7 @@ class AddMeal extends Component {
               name='clasifiction'
               type='radio'
               checked={this.state.sandwich}
+              checked={this.state.clasifiction === 'Sandwiches'}
               onChange={this.handleChange}
               value='Sandwiches'
             />
@@ -458,6 +470,7 @@ class AddMeal extends Component {
               type='radio'
               value='Starters'
               checked={this.state.starter}
+              checked={this.state.clasifiction === 'Starters'}
               onChange={this.handleChange}
               required
             />
@@ -469,6 +482,7 @@ class AddMeal extends Component {
               type='radio'
               checked={this.state.pastry}
               onChange={this.handleChange}
+              checked={this.state.clasifiction === 'Pastries'}
               value='Pastries'
             />
             <text>Pastries</text>
@@ -482,6 +496,7 @@ class AddMeal extends Component {
               value='sauce'
               checked={this.state.sauce}
               onChange={this.handleChange}
+              checked={this.state.clasifiction === 'sauce'}
             />
             <text>sauce</text>
             <Radio
@@ -491,6 +506,7 @@ class AddMeal extends Component {
               type='radio'
               checked={this.state.seaFood}
               onChange={this.handleChange}
+              checked={this.state.clasifiction === 'Sea food'}
               value='Sea food'
             />
             <text>Sea food</text>

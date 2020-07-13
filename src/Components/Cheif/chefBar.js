@@ -11,13 +11,15 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 
 import logo from '../images/logo2.png';
-import user from '../images/user.png';
-import userblack from '../images/userblack.png';
+import chef from '../images/chef.png';
+import add from '../images/add.png';
+import chefblack from '../images/chefblack.png';
 import savedFull from '../images/savedFull.png';
 import recipe from '../images/recipe (1).png';
 import calendar from '../images/calendar.png';
 import logout from '../images/logout.png';
 import arrow from '../images/arrow.png';
+import './chefBar.css';
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -77,7 +79,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LearnerBar = () => {
+const ChefBar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -115,8 +117,11 @@ const LearnerBar = () => {
             <img src={arrow} className='Categories' />
 
             <Link className='LinkCategories'>Categories</Link>
+            <img src={add} className='add' />
 
-            <img onClick={handleMenu} src={user} className='chef' />
+            <Link className='LinkCategories'>AddMeal</Link>
+
+            <img onClick={handleMenu} src={chef} className='chef' />
             <Menu
               id='menu-appbar'
               anchorEl={anchorEl}
@@ -133,14 +138,17 @@ const LearnerBar = () => {
               onClose={handleClose}
             >
               <MenuItem onClick={handleClose}>
-                <img src={userblack} className='chefblack' />
+                <img src={chefblack} className='chefblack' />
                 User name
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <img src={savedFull} className='chefblack' />
                 saved recipes
               </MenuItem>
-
+              <MenuItem onClick={handleClose}>
+                <img src={recipe} className='chefblack' />
+                My recipes
+              </MenuItem>
               <MenuItem onClick={handleClose}>
                 <img src={calendar} className='chefblack' />
                 Cooking Schedule
@@ -156,4 +164,4 @@ const LearnerBar = () => {
     </Grid>
   );
 };
-export default LearnerBar;
+export default ChefBar;

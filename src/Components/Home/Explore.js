@@ -43,7 +43,17 @@ const Explore = () => {
         </AppBar>
       </ThemeProvider>
       {/* <text>Cheack our recipes :)</text> */}
-      <h1>All recipes</h1>
+      <h1
+        style={{
+          marginTop: 80,
+          textAlign: 'left',
+          marginLeft: 60,
+          marginBottom: 8,
+          fontFamily: 'arial'
+        }}
+      >
+        All recipes
+      </h1>
       <Card />
     </Grid>
   );

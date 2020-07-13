@@ -77,7 +77,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LearnerBar = () => {
+const UserBar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -156,4 +156,4 @@ const LearnerBar = () => {
     </Grid>
   );
 };
-export default LearnerBar;
+export default UserBar;
