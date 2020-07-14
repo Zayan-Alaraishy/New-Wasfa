@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Redirect } from 'react-router';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -16,7 +18,9 @@ import image from '../images/pan2.png';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { db, firebase } from '../../firebase';
-import history from '../../History';
+import { AuthContext } from '../../Auth';
+
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -68,9 +72,14 @@ const theme = createMuiTheme({
 
 export default function SignInSide() {
   const classes = useStyles();
+  let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggedType, setloggedType] = useState('');
+  const { currentUser } = useContext(AuthContext);
+  if (currentUser) {
+    return <Redirect to='/homelogged' />;
+  }
 
   const signin = () => {
     setloggedType('chef');
@@ -92,13 +101,7 @@ export default function SignInSide() {
               console.log(doc.id, ' => ', doc.data());
               console.log(doc.data().userType);
               setloggedType(doc.data().userType);
-              if (doc.data().userType == 'chef') {
-                // this.props.history.push('/chef');
-                console.log('to chef');
-              } else {
-                // this.props.history.push('/learner');
-                console.log('to learner');
-              }
+              history.push('/homelogged');
             });
           })
           .catch(function(error) {

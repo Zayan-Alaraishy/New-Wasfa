@@ -120,7 +120,7 @@ class MediaCard extends Component {
                 <img alt='star' className='Cardstar' src={star} />
                 <img alt='star' className='Cardstar' src={star} />
               </Grid>
-              <Typography>
+              <Typography style={{ marginTop: 1 }}>
                 <CardActions className='Cardactions'>
                   <IconButton className='expandOpen1'>
                     <img

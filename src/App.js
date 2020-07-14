@@ -9,6 +9,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
 import HomeLogged from './Components/Logged/homeLogged';
+import { AuthProvider } from './Auth';
+import PrivateRoute from './PrivateRoute';
+
 function App() {
   return (
     <Router history={history}>
@@ -20,21 +23,18 @@ function App() {
           <Route path='/explore'>
             <Explore />
           </Route>
-          <Route path='/addmeal'>
+          <PrivateRoute path='/addmeal'>
             <AddMeal />
-          </Route>
-          <Route path='/tutorial'>
-            <Tutorial />
-          </Route>
+          </PrivateRoute>
           <Route path='/signup'>
             <SignUp />
           </Route>
           <Route path='/signin'>
             <SignInSide />
           </Route>
-          <Route path='/homelogged'>
+          <PrivateRoute path='/homelogged'>
             <HomeLogged />
-          </Route>
+          </PrivateRoute>
         </Switch>
       </div>
     </Router>

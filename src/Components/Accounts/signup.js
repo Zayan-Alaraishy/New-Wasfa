@@ -16,6 +16,7 @@ import image from '../images/pan2.png';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { db, firebase } from '../../firebase';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -80,6 +81,7 @@ const theme = createMuiTheme({
 
 export default function SignUpSide() {
   const classes = useStyles();
+  let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -102,19 +104,10 @@ export default function SignUpSide() {
             Email: email,
             Username: username,
             userType: type
-          })
-          .then(docRef => {
-            if (type == 'chef') {
-              // this.props.history.push('/chef');
-              console.log('to chef');
-            } else {
-              // this.props.history.push('/learner');
-              console.log('to learner');
-            }
-          })
-          .catch(function(error) {
-            console.error('Error adding document: ', error);
           });
+        history.push('/homelogged').catch(function(error) {
+          console.error('Error adding document: ', error);
+        });
       })
 
       .catch(function(error) {

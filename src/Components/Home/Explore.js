@@ -34,10 +34,10 @@ const Explore = () => {
             <Grid item sm={11} xs={6} />
             <Button
               className='ExploreSignUpButton'
-              onClick={() => history.push('/tutorial')}
+              onClick={() => history.push('/signin')}
               color='secondary'
             >
-              SignUp
+              Sign in
             </Button>
           </Toolbar>
         </AppBar>

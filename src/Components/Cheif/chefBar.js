@@ -105,7 +105,7 @@ const ChefBar = () => {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder='Search…'
+                placeholder='Search by ingredients..'
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput

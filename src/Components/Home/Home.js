@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
     fontSize: 18,
     fontWeight: 'bold',
     color: '#59595c',
-    fontStyle: 'normal'
+    fontStyle: 'normal',
+    marginRight: 30
   },
   HomeExplore: {
     position: 'absolute',
@@ -81,7 +82,7 @@ const Home = () => {
             Sign Up
           </Button>
           <text className='HomeButton2'>|</text>
-          <Button color='primary' size='large' className={classes.HomeButton}>
+          <Button color='primary' className={classes.HomeButton}>
             About us
           </Button>
         </ThemeProvider>
@@ -89,9 +90,9 @@ const Home = () => {
 
       <h1 className='HomeWasfa'>Wasfa</h1>
       <div className='WasfaP'>
-        <p className='WasfaP1'>A recipe web app for learners</p>
+        <p className='WasfaP1'>Recipes web app for learners</p>
         <p className='WasfaP2'>to get recipes easily and</p>
-        <p className='WasfaP3'>cheves to share theirs </p>
+        <p className='WasfaP3'>chefs to share theirs </p>
       </div>
       <Button
         onClick={handleClick}
