@@ -1,18 +1,28 @@
-.container{
-  display: flex;
-  flex-direction: row;
-  background-color: #edf0f5; 
-
+.SignUpContaner{
+  background-color: #edf0f5;
+  float: left;
 }
+
 .pan{
-  width:500px; 
-  height: 100%;
-  padding: 100px
-
+  position: absolute;
+  left:100px;
+  top:40px;
+  width:600px;
+  height: auto;
 }
 
-.form{
-  padding-left: 300px; 
-  padding-top: 50px; 
-  align-items: center;
+.signup{
+  color: #59595c;
+  padding-top: 40px;
+  font-size: 30px;
+}
+
+.Forgetpassword{
+padding-right:110px;
+font-size: 14px;
+}
+
+.Do{
+  padding-right:40px;
+font-size: 14px;
 }
