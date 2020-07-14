@@ -8,7 +8,6 @@ class ChefHome extends Component {
   render() {
     return (
       <div>
-        {/* <ChefBar /> */}
         <h1>Heder</h1>
 
         <UserBar />

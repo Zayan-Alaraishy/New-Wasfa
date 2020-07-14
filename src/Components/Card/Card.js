@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './Card.css';
+import { db, firebase } from '../../firebase';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -10,6 +11,8 @@ import { Typography, Grid } from '@material-ui/core';
 
 import savedEmpty from '../images/savedEmpty.png';
 import star from '../images/star.png';
+import pizza from '../images/pizza.jpeg';
+
 import unschedule from '../images/unschedule.png';
 
 const defaultProps = {
@@ -21,40 +24,126 @@ const defaultProps = {
   }
 };
 
-export default function MediaCard() {
-  return (
-    <Card borderRadius='50%' {...defaultProps} className='card'>
-      <CardActionArea className='area'>
-        <CardMedia
-          className='CardImage'
-          image={
-            'https://images.unsplash.com/photo-1506354666786-959d6d497f1a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
-          }
-        />
-        <h1 className='Cardtitle'>bancake</h1>
-        <Grid className='starsCard'>
-          <img alt='star' className='Cardstar' src={star} />
-          <img alt='star' className='Cardstar' src={star} />
-          <img alt='star' className='Cardstar' src={star} />
-          <img alt='star' className='Cardstar' src={star} />
-          <img alt='star' className='Cardstar' src={star} />
-        </Grid>
+class MediaCard extends Component {
+  state = {
+    meals: [],
+    uid: '',
+    mealId: '',
+    favMeals: []
+  };
 
-        <Typography>
-          <CardActions className='Cardactions'>
-            <IconButton className='expandOpen1'>
-              <img alt='saveicone' className='saveCard' src={savedEmpty} />
-            </IconButton>
-            <IconButton className='expandOpen2'>
-              <img
-                alt='unscheduleicone'
-                className='unscheduleCard'
-                src={unschedule}
-              />
-            </IconButton>
-          </CardActions>
-        </Typography>
-      </CardActionArea>
-    </Card>
-  );
+  componentDidMount() {
+    const db = firebase.firestore();
+    const { meals, favMeals, uid, mealId } = this.state;
+    let me = this;
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User logged in already or has just logged in.
+        console.log(user.uid);
+        this.setState({ uid: user.uid });
+      } else {
+        // User not logged in or has just logged out.
+      }
+    });
+
+    db.collection('meals')
+      .get()
+      .then(function(querySnapshot) {
+        querySnapshot.forEach(doc => {
+          const fetchedMealData = {
+            id: doc.id,
+            ...doc.data()
+          };
+          meals.push(fetchedMealData);
+          me.setState(meals);
+        });
+      });
+  }
+
+  getMealId = clickedMealId => {
+    const { favMeals, uid } = this.state;
+    console.log(clickedMealId);
+    this.setState({ mealId: clickedMealId });
+    console.log(this.state.mealId);
+    const db = firebase.firestore();
+    console.log(this.state.uid);
+
+    db.collection('mealUserId')
+      .where('currentUserUid', '==', this.state.uid)
+      .get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          // doc.data() is never undefined for query doc snapshots
+          console.log(doc.id, '=>', doc.data());
+          const favMealsList = [];
+          const fetchedFavMealsId = doc.data().mealId;
+          favMealsList.push(fetchedFavMealsId);
+          console.log(favMealsList);
+          favMeals.push(fetchedFavMealsId);
+          this.setState(favMeals);
+          console.log(this.state.favMeals);
+        });
+      })
+      .then(() => {
+        if (this.state.favMeals.includes(clickedMealId)) {
+          alert('This meal is already saved');
+        } else {
+          db.collection('mealUserId').add({
+            mealId: clickedMealId,
+            currentUserUid: uid
+          });
+          alert('This meal is saved');
+        }
+      });
+  };
+
+  learnMore = clickedMealId => {
+    console.log(clickedMealId);
+    this.props.history.push('/meal', { id: clickedMealId });
+  };
+
+  render() {
+    const { meals } = this.state;
+    console.log(this.state.meals);
+    return (
+      <div>
+        {meals.map(meal => (
+          <Card borderRadius='50%' {...defaultProps} className='card'>
+            <CardActionArea className='area'>
+              <CardMedia className='CardImage' image={meal.image} />
+              <h1 className='Cardtitle'>{meal.mealName}</h1>
+              <Grid className='starsCard'>
+                <img alt='star' className='Cardstar' src={star} />
+                <img alt='star' className='Cardstar' src={star} />
+                <img alt='star' className='Cardstar' src={star} />
+                <img alt='star' className='Cardstar' src={star} />
+                <img alt='star' className='Cardstar' src={star} />
+              </Grid>
+              <Typography>
+                <CardActions className='Cardactions'>
+                  <IconButton className='expandOpen1'>
+                    <img
+                      alt='saveicone'
+                      className='saveCard'
+                      src={savedEmpty}
+                    />
+                  </IconButton>
+                  <IconButton className='expandOpen2'>
+                    <img
+                      alt='unscheduleicone'
+                      className='unscheduleCard'
+                      src={unschedule}
+                    />
+                  </IconButton>
+                </CardActions>
+              </Typography>
+            </CardActionArea>
+          </Card>
+        ))}
+      </div>
+    );
+  }
 }
+
+export default MediaCard;

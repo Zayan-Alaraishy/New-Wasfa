@@ -10,6 +10,8 @@ import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
 import ChefHome from './Components/Cheif/ChefHome';
 import UserBar from './Components/user/userBar';
+import ChefBar from './Components/Cheif/chefBar';
+
 function App() {
   return (
     <Router history={history}>
@@ -19,7 +21,7 @@ function App() {
             <Home />
           </Route>
           <Route path='/explore'>
-            <ChefHome />
+            <Explore />
           </Route>
           <Route path='/addmeal'>
             <AddMeal />
@@ -35,6 +37,9 @@ function App() {
           </Route>
           <Route path='chefhome'>
             <ChefHome />
+          </Route>
+          <Route path='/chef'>
+            <ChefBar />
           </Route>
         </Switch>
       </div>
