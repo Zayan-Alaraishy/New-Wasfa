@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { db, firebase } from '../../firebase';
+import { useHistory } from 'react-router-dom';
 
 import { AppBar, Toolbar, Grid } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -80,6 +82,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ChefBar = () => {
+  const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -92,6 +95,18 @@ const ChefBar = () => {
     setAnchorEl(null);
   };
 
+  const handleCloseLogOut = () => {
+    setAnchorEl(null);
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        history.push('/signin');
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+  };
   return (
     <Grid className='ExploreContaner'>
       <ThemeProvider theme={theme}>
@@ -153,7 +168,7 @@ const ChefBar = () => {
                 <img src={calendar} className='chefblack' />
                 Cooking Schedule
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={handleCloseLogOut}>
                 <img src={logout} className='chefblack' />
                 Log out
               </MenuItem>

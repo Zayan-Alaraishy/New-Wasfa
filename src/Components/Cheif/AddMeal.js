@@ -75,20 +75,14 @@ class AddMeal extends Component {
   componentDidMount() {
     const db = firebase.firestore();
 
-    db.collection('meals')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          console.log(`${doc.id} => ${doc.data().first}`);
-        });
-      });
-
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User logged in already or has just logged in.
         console.log(user.uid);
         this.setState({ uid: user.uid });
       } else {
+        console.log('no user');
+
         // User not logged in or has just logged out.
       }
     });

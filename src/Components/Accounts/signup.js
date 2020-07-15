@@ -5,7 +5,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+// import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -16,7 +16,7 @@ import image from '../images/pan2.png';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { db, firebase } from '../../firebase';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -85,6 +85,8 @@ export default function SignUpSide() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [driveLink, setDriveLink] = useState('');
+
   const [type, setType] = useState('');
 
   const addUser = e => {
@@ -103,7 +105,8 @@ export default function SignUpSide() {
           .set({
             Email: email,
             Username: username,
-            userType: type
+            userType: type,
+            ChefCV: driveLink
           });
         history.push('/homelogged').catch(function(error) {
           console.error('Error adding document: ', error);
@@ -119,6 +122,31 @@ export default function SignUpSide() {
         // ...
       });
   };
+
+  let chefCV;
+  if (type == 'chef') {
+    chefCV = (
+      <div className={classes.form} noValidate>
+        <TextField
+          variant='outlined'
+          margin='normal'
+          required
+          fullWidth
+          id='driveLink'
+          label='Drive link for your CV'
+          name='driveLink'
+          autoComplete='driveLink'
+          autoFocus
+          value={driveLink}
+          onChange={event => {
+            setDriveLink(event.target.value);
+          }}
+        />
+      </div>
+    );
+  } else {
+    chefCV = <div></div>;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -205,16 +233,12 @@ export default function SignUpSide() {
                     value='chef'
                     onChange={event => {
                       setType(event.target.value);
-                      return (
-                        <div>
-                          <h1> hello chef</h1>
-                        </div>
-                      );
                     }}
                     required
                   />
                   Chef
                 </text>
+                <div>{chefCV}</div>
               </Grid>
 
               {/* <FormControlLabel
@@ -233,7 +257,7 @@ export default function SignUpSide() {
               </Button>
               <Grid container>
                 <Grid item>
-                  <Link href='#' variant='body2'>
+                  <Link to='/signin' variant='body2'>
                     Have you already an account? Sign in
                   </Link>
                 </Grid>

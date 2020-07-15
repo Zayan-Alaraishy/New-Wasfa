@@ -25,7 +25,6 @@ class HomeLogged extends Component {
             if (fetchedType == 'chef') {
               this.setState({ chef: true });
             } else {
-              //
             }
           });
       } else {

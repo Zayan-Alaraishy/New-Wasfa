@@ -23,18 +23,14 @@ function App() {
           <Route path='/explore'>
             <Explore />
           </Route>
-          <PrivateRoute path='/addmeal'>
-            <AddMeal />
-          </PrivateRoute>
+          <PrivateRoute path='/addmeal' component={AddMeal} />
           <Route path='/signup'>
             <SignUp />
           </Route>
           <Route path='/signin'>
             <SignInSide />
           </Route>
-          <PrivateRoute path='/homelogged'>
-            <HomeLogged />
-          </PrivateRoute>
+          <PrivateRoute path='/homelogged' component={HomeLogged} />
         </Switch>
       </div>
     </Router>
