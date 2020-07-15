@@ -20,6 +20,8 @@ import calendar from '../images/calendar.png';
 import logout from '../images/logout.png';
 import arrow from '../images/arrow.png';
 import './chefBar.css';
+import { useHistory } from 'react-router-dom';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -76,10 +78,17 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       width: '20ch'
     }
+  },
+  menue: {
+    width: '550px',
+    hight: '1000px',
+    color: 'primary'
   }
 }));
 
 const ChefBar = () => {
+  let history = useHistory();
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -87,11 +96,26 @@ const ChefBar = () => {
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
+  const handleMenu2 = event => {
+    setAnchorEl(event.currentTarget);
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
+    console.log('working');
+    history.push('/mymeals');
   };
+  const handleClose2 = () => {
+    setAnchorEl(null);
+  };
+  function handleClick() {
+    history.push('/addmeal');
+  }
 
+  function handleClick2() {
+    console.log('working');
+    history.push('/mymeal');
+  }
   return (
     <Grid className='ExploreContaner'>
       <ThemeProvider theme={theme}>
@@ -114,50 +138,173 @@ const ChefBar = () => {
               />
             </div>
             <Grid xs={9} sm={8} />
-            <img src={arrow} className='Categories' />
+            <img src={arrow} className='Categories' onClick={handleMenu2} />
+            <Link className='LinkCategories' onClick={handleMenu2}>
+              Categories
+            </Link>
 
-            <Link className='LinkCategories'>Categories</Link>
-            <img src={add} className='add' />
-
-            <Link className='LinkCategories'>AddMeal</Link>
-
-            <img onClick={handleMenu} src={chef} className='chef' />
             <Menu
+              className={classes.menue}
               id='menu-appbar'
               anchorEl={anchorEl}
               anchorOrigin={{
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'right'
               }}
               keepMounted
               transformOrigin={{
-                vertical: 'top',
+                vertical: 'bottom',
                 horizontal: 'right'
               }}
               open={open}
-              onClose={handleClose}
+              onClose={handleClose2}
             >
-              <MenuItem onClick={handleClose}>
-                <img src={chefblack} className='chefblack' />
-                User name
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <img src={savedFull} className='chefblack' />
-                saved recipes
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <img src={recipe} className='chefblack' />
-                My recipes
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <img src={calendar} className='chefblack' />
-                Cooking Schedule
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <img src={logout} className='chefblack' />
-                Log out
-              </MenuItem>
+              <Grid>
+                <text className='type'>Type:</text>
+                <text className='line1'>_________</text>
+
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  salad
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  burgers
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Pastries
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Sandwiches{' '}
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Drinks
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Soup
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Sea food
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Deserts{' '}
+                </MenuItem>
+              </Grid>
+
+              <Grid className='menubar2'>
+                <text className='type'>Eating time:</text>
+                <text className='line2'>_______________</text>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  breakfast
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  dinner
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  lunch
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  snaks
+                </MenuItem>{' '}
+                <text className='type'>Time needed:</text>
+                <text className='line3'>_________________</text>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  15 min
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  30 min
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  An hour
+                </MenuItem>
+              </Grid>
+
+              <Grid className='menubar3'>
+                <text className='type'>Occasions:</text>
+                <text className='line2'>_____________</text>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Ramadan
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Birthdays
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Christmas
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Picnic
+                </MenuItem>{' '}
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Eid
+                </MenuItem>{' '}
+              </Grid>
+              <Grid className='menubar4'>
+                <text className='type'>Area:</text>
+                <text className='line2'>_________</text>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Western
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Eastern
+                </MenuItem>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  Asian{' '}
+                </MenuItem>
+                <text className='type'>Vegan :</text>
+                <text className='line4'>_________</text>
+                <MenuItem className={classes.menue} onClick={handleClose2}>
+                  for Vegans
+                </MenuItem>
+              </Grid>
             </Menu>
+
+            <img onClick={handleClick} src={add} className='add' />
+
+            <Link onClick={handleClick} className='LinkCategories'>
+              AddMeal
+            </Link>
+
+            <Grid>
+              <img onClick={handleMenu} src={chef} className='chef' />
+              <Menu
+                id='menu-appbar'
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right'
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>
+                  <img src={chefblack} className='chefblack' />
+                  User name
+                </MenuItem>
+                <MenuItem onClick={handleClick2} onClick={handleClose}>
+                  <img
+                    src={savedFull}
+                    className='chefblack'
+                    onClick={handleClick2}
+                  />
+                  saved recipes
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <img src={recipe} className='chefblack' />
+                  My recipes
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <img src={calendar} className='chefblack' />
+                  Cooking Schedule
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <img src={logout} className='chefblack' />
+                  Log out
+                </MenuItem>
+              </Menu>
+            </Grid>
           </Toolbar>
         </AppBar>
       </ThemeProvider>

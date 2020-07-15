@@ -22,6 +22,8 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Pan from '../images/pan2.png';
 import { firebase } from '../../firebase';
 import './signup.css';
+import { useHistory } from 'react-router-dom';
+
 const defaultProps = {
   style: {
     width: '530px',
@@ -66,6 +68,10 @@ const theme = createMuiTheme({
 });
 
 export default function SignInSide() {
+  let history = useHistory();
+  function handleClick() {
+    history.push('/signup');
+  }
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -208,8 +214,8 @@ export default function SignInSide() {
 
           <Grid>
             <Grid item>
-              <Link href='#' className='Do'>
-                Don't have an account? Sign in
+              <Link onClick={handleClick} className='Do'>
+                Don't have an account? Sign up
               </Link>
             </Grid>
           </Grid>

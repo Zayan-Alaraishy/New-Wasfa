@@ -53,3 +53,45 @@ padding-right:30px;
   width:21px;
   height: 10.3px;
 }
+.type{
+  margin:10px;
+  font-weight: bold;
+}
+.menubar2{
+  position: absolute;
+  left:110px;
+  bottom: 0px;
+}
+.line1{
+  position: absolute;
+  top:30px;
+  left:15px;
+}
+
+.line2{
+  position: absolute;
+  top:23.5px;
+  left:10px;
+}
+
+.line3{
+  position: absolute;
+  top:210px;
+  left:10px;
+}
+.menubar3{
+  position: absolute;
+  left:270px;
+  bottom: 116px;
+}
+
+.line4{
+  position: absolute;
+  top:175px;
+  left:10px;
+}
+.menubar4{
+  position: absolute;
+  left:410px;
+  bottom: 108px;
+}

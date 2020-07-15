@@ -11,6 +11,7 @@ import SignUp from './Components/Accounts/signup';
 import Meal from './Components/meals';
 
 import HomeLogged from './Components/Logged/homeLogged';
+import MyMeals from './Components/Cheif/MyMeals';
 function App() {
   return (
     <Router history={history}>
@@ -19,12 +20,14 @@ function App() {
           <Route exact path='/'>
             <Home />
           </Route>
-          <Route path='/explore'>
+          <Route path='/explore' component={Explore}>
             <Explore />
           </Route>
           <Route path='/addmeal'>
             <AddMeal />
           </Route>
+          <Route path='mymeals' component={MyMeals} />
+
           <Route path='/tutorial'>
             <Tutorial />
           </Route>

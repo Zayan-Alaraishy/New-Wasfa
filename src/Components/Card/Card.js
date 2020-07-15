@@ -15,6 +15,8 @@ import pizza from '../images/pizza.jpeg';
 
 import unschedule from '../images/unschedule.png';
 
+import { useHistory } from 'react-router-dom';
+
 const defaultProps = {
   style: {
     width: '260px',
@@ -106,12 +108,17 @@ class MediaCard extends Component {
   render() {
     const { meals } = this.state;
     console.log(this.state.meals);
+
     return (
       <div>
         {meals.map(meal => (
           <Card borderRadius='50%' {...defaultProps} className='card'>
             <CardActionArea className='area'>
-              <CardMedia className='CardImage' image={meal.image} />
+              <CardMedia
+                className='CardImage'
+                image={meal.image}
+                onClick={() => this.learnMore(meal.id)}
+              />
               <h1 className='Cardtitle'>{meal.mealName}</h1>
               <Grid className='starsCard'>
                 <img alt='star' className='Cardstar' src={star} />
