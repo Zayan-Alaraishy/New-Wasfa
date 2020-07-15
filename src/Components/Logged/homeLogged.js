@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import Card from '../Card/Card';
-import { AppBar, Toolbar, Grid, Button, Link } from '@material-ui/core';
 import LearnerBar from './learnerBar';
 import ChefBar from '../Cheif/chefBar';
-import { db, firebase } from '../../firebase';
+import { firebase } from '../../firebase';
 
 class HomeLogged extends Component {
   state = {

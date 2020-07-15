@@ -6,35 +6,46 @@ import { ThemeProvider } from '@material-ui/styles';
 import logo from '../images/logo2.png';
 import history from '../../History';
 import { createMuiTheme } from '@material-ui/core/styles';
+import { useHistory } from 'react-router-dom';
+
 const theme = createMuiTheme({
   palette: {
     primary: {
-      light: '#757CE8',
+      light: '#ffffff',
       main: '#3A3A3A',
-      dark: '#757CE8',
-      contrastText: '#757CE8'
+      dark: '#ffffff',
+      contrastText: '#ffffff'
     },
     secondary: {
-      light: '#FF7961',
-      main: '#fff',
-      dark: '#BA000D',
-      contrastText: '#000'
+      light: '#ffffff',
+      main: '#ffffff',
+      dark: '#ffffff',
+      contrastText: '#ffffff'
     }
   }
 });
 const Explore = () => {
+  let history = useHistory();
+
+  function handleClick() {
+    history.push('/signup');
+  }
+
+  function handleClick2() {
+    history.push('/');
+  }
   return (
-    <Grid className='ExploreContaner'>
+    <Grid className='ExploreContaner1'>
       <ThemeProvider theme={theme}>
-        <AppBar position='static' color='primary'>
+        <AppBar color='primary'>
           <Toolbar>
             <Grid>
-              <img src={logo} className='Logo' />
+              <img onClick={handleClick2} src={logo} className='Logo' />
             </Grid>
-            <Grid item sm={11} xs={6} />
+            <Grid item sm={11} xs={9} />
             <Button
               className='ExploreSignUpButton'
-              onClick={() => history.push('/signin')}
+              onClick={handleClick}
               color='secondary'
             >
               Sign in
@@ -49,10 +60,12 @@ const Explore = () => {
           textAlign: 'left',
           marginLeft: 60,
           marginBottom: 8,
-          fontFamily: 'arial'
+          fontFamily: 'arial',
+          color: '#59595c',
+          fontSize: 25
         }}
       >
-        All recipes
+        recipes:
       </h1>
       <Card />
     </Grid>

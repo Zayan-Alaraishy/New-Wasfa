@@ -8,6 +8,8 @@ import AddMeal from './Components/Cheif/AddMeal';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
+import Meal from './Components/meals';
+
 import HomeLogged from './Components/Logged/homeLogged';
 import { AuthProvider } from './Auth';
 import PrivateRoute from './PrivateRoute';
@@ -31,6 +33,9 @@ function App() {
             <SignInSide />
           </Route>
           <PrivateRoute path='/homelogged' component={HomeLogged} />
+          <Route path='/meal'>
+            <Meal />
+          </Route>
         </Switch>
       </div>
     </Router>

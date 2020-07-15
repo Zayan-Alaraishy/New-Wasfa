@@ -14,7 +14,6 @@ import logo from '../images/logo2.png';
 import user from '../images/user.png';
 import userblack from '../images/userblack.png';
 import savedFull from '../images/savedFull.png';
-import recipe from '../images/recipe (1).png';
 import calendar from '../images/calendar.png';
 import logout from '../images/logout.png';
 import arrow from '../images/arrow.png';

@@ -7,19 +7,24 @@ import { AppBar, Toolbar, Grid, Button, Typography } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import Radio from '@material-ui/core/Radio';
 import Checkbox from '@material-ui/core/Checkbox';
 import TextField from '@material-ui/core/TextField';
 
 import './AddMeal.css';
-import { db, firebase } from '../../firebase';
+import { firebase } from '../../firebase';
 
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
       width: '25ch'
+    },
+    display: 'flex',
+    '& > * + *': {
+      marginLeft: theme.spacing(2)
     }
   }
 }));
@@ -56,10 +61,10 @@ const theme = createMuiTheme({
       contrastText: '#757ce8'
     },
     secondary: {
-      light: '#ff7961',
-      main: '#fff',
-      dark: '#ba000d',
-      contrastText: '#000'
+      light: '#3a3a3a',
+      main: '#3a3a3a',
+      dark: '#3a3a3a',
+      contrastText: '#3a3a3a'
     }
   }
 });
@@ -271,13 +276,9 @@ class AddMeal extends Component {
             <button className='upload' onClick={this.handleUpload}>
               Upload
             </button>
-            <progress value={this.state.progress} max='100' />
-            <img
-              src={this.state.url || 'http://via.placeholder.com/300x200'}
-              alt='Uploaded images'
-              height='200'
-              width='auto'
-            />
+            <CircularProgress variant='static' value={this.state.progress} />
+
+            <img src={this.state.url} height='200' width='auto' />
           </Grid>
         </Card>
 
@@ -618,7 +619,11 @@ class AddMeal extends Component {
               <text>None</text>
             </Grid>
           </Grid>
-          <Button className='AddButton' onClick={this.AddMeal}>
+          <Button
+            variant='contained'
+            className='AddButton'
+            onClick={this.AddMeal}
+          >
             Add meal
           </Button>
         </Card>

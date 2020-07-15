@@ -1,0 +1,158 @@
+.MealContanier{
+  background-color: #edf0f5;
+  float: left;
+}
+
+.MealShape1{
+  clip-path: polygon(51% 0, 100% 48%, 100% 0);
+  width:420px;
+  height: 420px;
+  top:60px;
+  position: absolute;
+  right:0px;
+}
+
+.MealShape2{
+ border-radius: 60%;
+ position: absolute;
+ right:0px;
+ top:60px;
+ width:420px;
+ height: 420px;
+}
+
+.stary{
+  width:25px;
+  float: left;
+}
+.starts{
+  margin-left: 40px;
+  margin-top: 150px;
+}
+.MealName{
+  color:#3a3a3a;
+  font-size: 40px;
+  background-color: white;
+  float: left;
+  margin-left: 40px;
+  margin-top: 30px;
+}
+.by{
+  color:#6b6b76;
+  background-color: white;
+  font-size: 20px;
+  float: left;
+  margin-top: 90px;
+  margin-left:-205px;
+}
+.IngredientsH{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 25px;
+  float: left;
+  margin-left: -125px;
+  margin-top: 80px;
+
+}
+.Ingredients{
+  color:#3a3a3a;
+  font-size: 20px;
+  float: left;
+  margin-left: -140px;
+  margin-top: 120px;
+
+}
+
+.RecipeH{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 25px;
+  float: left;
+  margin-left: -565px;
+  margin-top: 180px;
+}
+.Recipe{
+  color:#3a3a3a;
+  font-size: 20px;
+  float: left;
+  margin-left: -80px;
+  margin-top: 50px;
+}
+
+.type{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+  margin-left: 100px;
+  margin-top: 110px;
+}
+
+.typep{
+  color:#3a3a3a;
+  font-weight: normal;
+  margin-top: -24px;
+  margin-left: 100px;
+}
+.time{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+  margin-left: 980px;
+  margin-top: -10px;
+}
+
+.timep{
+  color:#3a3a3a;
+  font-weight: normal;
+  margin-top: -24px;
+  margin-left: 208px;
+}
+
+.Occasions{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+  margin-left: 1012px;
+  margin-top: -15px;
+}
+
+.Occasionsp{
+  font-weight: normal;
+  margin-top: -24px;
+  margin-left: 160px;
+
+}
+.Area{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+  margin-left: 977px;
+  margin-top: -15px;
+}
+.Areap{
+  font-weight: normal;
+  margin-top: -24px;
+  margin-left: 150px;
+
+}
+
+.Time{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 20px;
+  float: left;
+  margin-left: 1015px;
+  margin-top: -15px;
+  padding-bottom: 20px;
+}
+
+.Timep{
+  font-weight: normal;
+  margin-top: -24px;
+  margin-left: 110px;
+
+}

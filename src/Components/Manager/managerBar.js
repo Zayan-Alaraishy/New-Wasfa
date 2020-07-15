@@ -11,7 +11,7 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 
 import logo from '../images/logo2.png';
-import user from '../images/user.png';
+import manager from '../images/user.png';
 import userblack from '../images/userblack.png';
 import savedFull from '../images/savedFull.png';
 import recipe from '../images/recipe (1).png';
@@ -96,7 +96,7 @@ const ManagerBar = () => {
             </Grid>
             <h1>Chefs requests</h1>
 
-            <img onClick={handleMenu} src={user} className='chef' />
+            <img src={manager} className='chef' />
           </Toolbar>
         </AppBar>
       </ThemeProvider>

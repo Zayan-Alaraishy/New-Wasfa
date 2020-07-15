@@ -111,8 +111,14 @@ class MediaCard extends Component {
         {meals.map(meal => (
           <Card borderRadius='50%' {...defaultProps} className='card'>
             <CardActionArea className='area'>
-              <CardMedia className='CardImage' image={meal.image} />
-              <h1 className='Cardtitle'>{meal.mealName}</h1>
+              <CardMedia
+                className='CardImage'
+                image={meal.image}
+                onClick={() => this.learnMore(meal.id)}
+              />
+              <h1 className='Cardtitle' onClick={() => this.learnMore(meal.id)}>
+                {meal.mealName}
+              </h1>
               <Grid className='starsCard'>
                 <img alt='star' className='Cardstar' src={star} />
                 <img alt='star' className='Cardstar' src={star} />
