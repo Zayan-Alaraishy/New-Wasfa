@@ -32,6 +32,7 @@ import recipe from '../images/recipe (1).png';
 import calendar from '../images/calendar.png';
 import logout from '../images/logout.png';
 import arrow from '../images/arrow.png';
+import ChefBar from './chefBar';
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
@@ -261,135 +262,8 @@ class AddMeal extends Component {
     // }
     return (
       <Grid className='AddMealContaner'>
-        <ThemeProvider theme={theme}>
-          <AppBar color='primary'>
-            <Toolbar>
-              <Grid>
-                <img src={logo} className='Logo' />
-              </Grid>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder='Search…'
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-              </div>
-              <Grid xs={9} sm={8} />
-              <img src={arrow} className='Categories' />
-              <Link className='LinkCategories'>Categories</Link>
-
-              <Menu
-                className={classes.menue}
-                id='menu-appbar'
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right'
-                }}
-              >
-                <Grid>
-                  <text className='type'>Type:</text>
-                  <text className='line1'>_________</text>
-
-                  <MenuItem className={classes.menue}>salad</MenuItem>
-                  <MenuItem className={classes.menue}>burgers</MenuItem>
-                  <MenuItem className={classes.menue}>Pastries</MenuItem>
-                  <MenuItem className={classes.menue}>Sandwiches </MenuItem>
-                  <MenuItem className={classes.menue}>Drinks</MenuItem>
-                  <MenuItem className={classes.menue}>Soup</MenuItem>
-                  <MenuItem className={classes.menue}>Sea food</MenuItem>
-                  <MenuItem className={classes.menue}>Deserts </MenuItem>
-                </Grid>
-
-                <Grid className='menubar2'>
-                  <text className='type'>Eating time:</text>
-                  <text className='line2'>_______________</text>
-                  <MenuItem className={classes.menue}>breakfast</MenuItem>
-                  <MenuItem className={classes.menue}>dinner</MenuItem>
-                  <MenuItem className={classes.menue}>lunch</MenuItem>
-                  <MenuItem className={classes.menue}>snaks</MenuItem>{' '}
-                  <text className='type'>Time needed:</text>
-                  <text className='line3'>_________________</text>
-                  <MenuItem className={classes.menue}>15 min</MenuItem>
-                  <MenuItem className={classes.menue}>30 min</MenuItem>
-                  <MenuItem className={classes.menue}>An hour</MenuItem>
-                </Grid>
-
-                <Grid className='menubar3'>
-                  <text className='type'>Occasions:</text>
-                  <text className='line2'>_____________</text>
-                  <MenuItem className={classes.menue}>Ramadan</MenuItem>
-                  <MenuItem className={classes.menue}>Birthdays</MenuItem>
-                  <MenuItem className={classes.menue}>Christmas</MenuItem>
-                  <MenuItem className={classes.menue}>Picnic</MenuItem>{' '}
-                  <MenuItem className={classes.menue}>Eid</MenuItem>{' '}
-                </Grid>
-                <Grid className='menubar4'>
-                  <text className='type'>Area:</text>
-                  <text className='line2'>_________</text>
-                  <MenuItem className={classes.menue}>Western</MenuItem>
-                  <MenuItem className={classes.menue}>Eastern</MenuItem>
-                  <MenuItem className={classes.menue}>Asian </MenuItem>
-                  <text className='type'>Vegan :</text>
-                  <text className='line4'>_________</text>
-                  <MenuItem className={classes.menue}>for Vegans</MenuItem>
-                </Grid>
-              </Menu>
-
-              <img src={add} className='add' />
-
-              <Link className='LinkCategories'>AddMeal</Link>
-
-              <Grid>
-                <img src={chef} className='chef' />
-                <Menu
-                  id='menu-appbar'
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                >
-                  <MenuItem>
-                    <img src={chefblack} className='chefblack' />
-                    User name
-                  </MenuItem>
-                  <MenuItem>
-                    <img src={savedFull} className='chefblack' />
-                    saved recipes
-                  </MenuItem>
-                  <MenuItem>
-                    <img src={recipe} className='chefblack' />
-                    My recipes
-                  </MenuItem>
-                  <MenuItem>
-                    <img src={calendar} className='chefblack' />
-                    Cooking Schedule
-                  </MenuItem>
-                  <MenuItem>
-                    <img src={logout} className='chefblack' />
-                    Log out
-                  </MenuItem>
-                </Menu>
-              </Grid>
-            </Toolbar>
-          </AppBar>
-        </ThemeProvider>
-        <h1>hk</h1>
+        <ChefBar />
+        <h1>{'dlfjlgj'}</h1>
 
         <Card {...defaultProps} className='cardAddMeal'>
           <form noValidate autoComplete='off'>
