@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { db, firebase } from '../../firebase';
 
@@ -10,6 +10,7 @@ import Menu from '@material-ui/core/Menu';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import { AuthContext } from '../../Auth';
 
 import logo from '../images/logo2.png';
 import chef from '../images/chef.png';
@@ -91,7 +92,22 @@ const ChefBar = () => {
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [name, setName] = useState('');
+  const [search, setSearch] = useState('');
+
   const open = Boolean(anchorEl);
+  const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    const db = firebase.firestore();
+    db.collection('users')
+      .doc(currentUser.uid)
+      .get()
+      .then(doc => {
+        console.log(doc.data().Username);
+        setName(doc.data().Username);
+      });
+  });
 
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
@@ -103,15 +119,49 @@ const ChefBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
     console.log('working');
-    history.push('/mymeals');
-  };
+  }; // history.push('/mymeals');
+
   const handleClose2 = () => {
     setAnchorEl(null);
   };
   const handleClick = () => {
     history.push('/addmeal');
   };
+  const handleLogOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        // Sign-out successful.
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+  };
+  const push_myRecipes = () => {
+    history.push('/MyMeals');
+  };
+  const handleSearch = e => {
+    if (e.key === 'Enter') {
+      console.log(e.target.value);
+      history.push(`/result/${e.target.value}`);
+    }
+    // history.push(`/result/${search}`);
 
+    // const db=firebase.firestore()
+    // db.collection(meals).where('Ingredients', '>=', search)
+    // .get()
+    // .then((querySnapshot)=>{
+    //   querySnapshot.forEach((doc)=>{
+    //     const results = {
+    //       id: doc.id,
+    //       ...doc.data()
+    //     };
+    //     list.push(results);
+
+    //   })
+    // })
+  };
   const handleCloseLogOut = () => {
     setAnchorEl(null);
     firebase
@@ -147,15 +197,20 @@ const ChefBar = () => {
                   input: classes.inputInput
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                value={search}
+                onChange={event => {
+                  setSearch(event.target.value);
+                  console.log(event.target.value);
+                  // this.props.history.push(`/result/${event.target.value}`);
+                }}
+                onKeyDown={handleSearch}
               />
             </div>
             <Grid xs={9} sm={8} />
-            <img src={arrow} className='Categories' onClick={handleMenu2} />
-            <Link className='LinkCategories' onClick={handleMenu2}>
-              Categories
-            </Link>
+            <img src={arrow} className='Categories' />
+            <Link className='LinkCategories'>Categories</Link>
 
-            <Menu
+            {/* <Menu
               className={classes.menue}
               id='menu-appbar'
               anchorEl={anchorEl}
@@ -266,7 +321,7 @@ const ChefBar = () => {
                   for Vegans
                 </MenuItem>
               </Grid>
-            </Menu>
+            </Menu> */}
 
             <img onClick={handleClick} src={add} className='add' />
 
@@ -291,23 +346,23 @@ const ChefBar = () => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>
+                <MenuItem>
                   <img src={chefblack} className='chefblack' />
-                  User name
+                  Chef {name}
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem>
                   <img src={savedFull} className='chefblack' />
                   saved recipes
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={push_myRecipes}>
                   <img src={recipe} className='chefblack' />
                   My recipes
                 </MenuItem>
-                <MenuItem onClick={handleClose}>
+                {/* <MenuItem onClick={handleClose}>
                   <img src={calendar} className='chefblack' />
                   Cooking Schedule
-                </MenuItem>
-                <MenuItem onClick={handleClose}>
+                </MenuItem> */}
+                <MenuItem onClick={handleLogOut}>
                   <img src={logout} className='chefblack' />
                   Log out
                 </MenuItem>

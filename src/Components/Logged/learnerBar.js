@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppBar, Toolbar, Grid } from '@material-ui/core';
@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import { AuthContext } from '../../Auth';
 
 import logo from '../images/logo2.png';
 import user from '../images/user.png';
@@ -85,6 +86,20 @@ const LearnerBar = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
+  const { currentUser } = useContext(AuthContext);
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const db = firebase.firestore();
+    db.collection('users')
+      .doc(currentUser.uid)
+      .get()
+      .then(doc => {
+        console.log(doc.data().Username);
+        setName(doc.data().Username);
+      });
+  });
+
   const handleMenu = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -92,13 +107,12 @@ const LearnerBar = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-  const handleCloseLogOut = () => {
-    setAnchorEl(null);
+  const handleLogOut = () => {
     firebase
       .auth()
       .signOut()
       .then(function() {
-        history.push('/signin');
+        // Sign-out successful.
       })
       .catch(function(error) {
         // An error happened.
@@ -149,18 +163,18 @@ const LearnerBar = () => {
             >
               <MenuItem onClick={handleClose}>
                 <img src={userblack} className='chefblack' />
-                User name
+                Hello {name}
               </MenuItem>
               <MenuItem onClick={handleClose}>
                 <img src={savedFull} className='chefblack' />
                 saved recipes
               </MenuItem>
 
-              <MenuItem onClick={handleClose}>
+              {/* <MenuItem onClick={handleClose}>
                 <img src={calendar} className='chefblack' />
                 Cooking Schedule
-              </MenuItem>
-              <MenuItem onClick={handleCloseLogOut}>
+              </MenuItem> */}
+              <MenuItem onClick={handleLogOut}>
                 <img src={logout} className='chefblack' />
                 Log out
               </MenuItem>
