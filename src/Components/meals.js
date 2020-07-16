@@ -35,6 +35,7 @@ class Meal extends Component {
   };
 
   componentDidMount() {
+    const { id } = this.props.match.params;
     const db = firebase.firestore();
 
     const { state } = this.props.history.location;
@@ -42,7 +43,7 @@ class Meal extends Component {
     const { meal } = this.state;
     let me = this;
     db.collection('meals')
-      .doc(state.id)
+      .doc(id)
       .get()
       .then(doc => {
         console.log(doc.data());

@@ -9,6 +9,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
 import Meal from './Components/meals';
+import Save from './Components/Logged/saved';
+import { AuthProvider } from './Auth';
 
 import HomeLogged from './Components/Logged/homeLogged';
 import MyMeals from './Components/Cheif/MyMeals';
@@ -42,6 +44,9 @@ function App() {
           </Route>
           <Route path='/meal'>
             <Meal />
+          </Route>
+          <Route path='/save'>
+            <Save />
           </Route>
         </Switch>
       </div>

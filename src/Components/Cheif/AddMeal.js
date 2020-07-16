@@ -213,8 +213,6 @@ class AddMeal extends Component {
   };
 
   AddMeal = () => {
-    let history = useHistory();
-
     const db = firebase.firestore();
 
     const {
