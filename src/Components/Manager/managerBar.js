@@ -11,15 +11,13 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 
 import logo from '../images/logo2.png';
-import user from '../images/user.png';
+import manager from '../images/user.png';
 import userblack from '../images/userblack.png';
 import savedFull from '../images/savedFull.png';
+import recipe from '../images/recipe (1).png';
 import calendar from '../images/calendar.png';
 import logout from '../images/logout.png';
 import arrow from '../images/arrow.png';
-import { db, firebase } from '../../firebase';
-import { useHistory } from 'react-router-dom';
-
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -79,30 +77,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const LearnerBar = () => {
+const ManagerBar = () => {
   const classes = useStyles();
-  const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
 
-  const handleMenu = event => {
-    setAnchorEl(event.currentTarget);
-  };
-
   const handleClose = () => {
     setAnchorEl(null);
-  };
-  const handleCloseLogOut = () => {
-    setAnchorEl(null);
-    firebase
-      .auth()
-      .signOut()
-      .then(function() {
-        history.push('/signin');
-      })
-      .catch(function(error) {
-        // An error happened.
-      });
   };
 
   return (
@@ -113,62 +94,13 @@ const LearnerBar = () => {
             <Grid>
               <img src={logo} className='Logo' />
             </Grid>
-            <div className={classes.search}>
-              <div className={classes.searchIcon}>
-                <SearchIcon />
-              </div>
-              <InputBase
-                placeholder='Search…'
-                classes={{
-                  root: classes.inputRoot,
-                  input: classes.inputInput
-                }}
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </div>
-            <Grid xs={9} sm={8} />
-            <img src={arrow} className='Categories' />
+            <h1>Chefs requests</h1>
 
-            <Link className='LinkCategories'>Categories</Link>
-
-            <img onClick={handleMenu} src={user} className='chef' />
-            <Menu
-              id='menu-appbar'
-              anchorEl={anchorEl}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right'
-              }}
-              open={open}
-              onClose={handleClose}
-            >
-              <MenuItem onClick={handleClose}>
-                <img src={userblack} className='chefblack' />
-                User name
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <img src={savedFull} className='chefblack' />
-                saved recipes
-              </MenuItem>
-
-              <MenuItem onClick={handleClose}>
-                <img src={calendar} className='chefblack' />
-                Cooking Schedule
-              </MenuItem>
-              <MenuItem onClick={handleCloseLogOut}>
-                <img src={logout} className='chefblack' />
-                Log out
-              </MenuItem>
-            </Menu>
+            <img src={manager} className='chef' />
           </Toolbar>
         </AppBar>
       </ThemeProvider>
     </Grid>
   );
 };
-export default LearnerBar;
+export default ManagerBar;

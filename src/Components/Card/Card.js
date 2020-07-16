@@ -14,6 +14,7 @@ import star from '../images/star.png';
 import pizza from '../images/pizza.jpeg';
 import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import unschedule from '../images/unschedule.png';
+import { withRouter } from 'react-router-dom';
 
 import { useHistory } from 'react-router-dom';
 
@@ -108,6 +109,7 @@ class MediaCard extends Component {
   render() {
     const { meals } = this.state;
     console.log(this.state.meals);
+    console.log(this.props);
 
     return (
       <div>
@@ -127,7 +129,7 @@ class MediaCard extends Component {
                 <img alt='star' className='Cardstar' src={star} />
                 <img alt='star' className='Cardstar' src={star} />
               </Grid>
-              <Typography>
+              <Typography style={{ marginTop: 1 }}>
                 <CardActions className='Cardactions'>
                   <IconButton className='expandOpen2'>
                     <img

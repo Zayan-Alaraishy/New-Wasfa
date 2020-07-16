@@ -48,7 +48,7 @@ const Explore = () => {
               onClick={handleClick}
               color='secondary'
             >
-              SignUp
+              Sign in
             </Button>
           </Toolbar>
         </AppBar>

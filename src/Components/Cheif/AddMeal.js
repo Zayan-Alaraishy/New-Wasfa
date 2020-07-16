@@ -5,15 +5,13 @@ import Card from '@material-ui/core/Card';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
-import { AppBar, Toolbar, Grid, Button, Typography } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import InputBase from '@material-ui/core/InputBase';
-import SearchIcon from '@material-ui/icons/Search';
-import MenuItem from '@material-ui/core/MenuItem';
-import Menu from '@material-ui/core/Menu';
+import {
+  CircularProgress,
+  makeStyles,
+  Grid,
+  Button,
+  createMuiTheme
+} from '@material-ui/core';
 
 import Radio from '@material-ui/core/Radio';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -22,16 +20,8 @@ import TextField from '@material-ui/core/TextField';
 import './AddMeal.css';
 import { firebase } from '../../firebase';
 import { classes } from 'istanbul-lib-coverage';
+import ChefBar from './chefBar';
 
-import logo from '../images/logo2.png';
-import chef from '../images/chef.png';
-import add from '../images/add.png';
-import chefblack from '../images/chefblack.png';
-import savedFull from '../images/savedFull.png';
-import recipe from '../images/recipe (1).png';
-import calendar from '../images/calendar.png';
-import logout from '../images/logout.png';
-import arrow from '../images/arrow.png';
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
@@ -96,20 +86,14 @@ class AddMeal extends Component {
   componentDidMount() {
     const db = firebase.firestore();
 
-    db.collection('meals')
-      .get()
-      .then(querySnapshot => {
-        querySnapshot.forEach(doc => {
-          console.log(`${doc.id} => ${doc.data().first}`);
-        });
-      });
-
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         // User logged in already or has just logged in.
         console.log(user.uid);
         this.setState({ uid: user.uid });
       } else {
+        console.log('no user');
+
         // User not logged in or has just logged out.
       }
     });
@@ -231,17 +215,22 @@ class AddMeal extends Component {
     } = this.state;
 
     console.log(this.state);
-    db.collection('meals').add({
-      mealName: name,
-      Ingredients: contents,
-      recipe: recipe,
-      image: url,
-      usid: uid,
-      TimeToEat: eatTime,
-      Occasions: occasions,
-      region: region,
-      MealType: clasifiction
-    });
+    db.collection('meals')
+      .add({
+        mealName: name,
+        Ingredients: contents,
+        recipe: recipe,
+        image: url,
+        usid: uid,
+        TimeToEat: eatTime,
+        Occasions: occasions,
+        region: region,
+        MealType: clasifiction,
+        veg: veg
+      })
+      .then(() => {
+        this.props.history.push('/myMeals');
+      });
   };
 
   render() {
@@ -263,134 +252,8 @@ class AddMeal extends Component {
     // }
     return (
       <Grid className='AddMealContaner'>
-        <ThemeProvider theme={theme}>
-          <AppBar color='primary'>
-            <Toolbar>
-              <Grid>
-                <img src={logo} className='Logo' />
-              </Grid>
-              <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                  <SearchIcon />
-                </div>
-                <InputBase
-                  placeholder='Search…'
-                  classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput
-                  }}
-                  inputProps={{ 'aria-label': 'search' }}
-                />
-              </div>
-              <Grid xs={9} sm={8} />
-              <img src={arrow} className='Categories' />
-              <Link className='LinkCategories'>Categories</Link>
+        <ChefBar />
 
-              <Menu
-                className={classes.menue}
-                id='menu-appbar'
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right'
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'right'
-                }}
-              >
-                <Grid>
-                  <text className='type'>Type:</text>
-                  <text className='line1'>_________</text>
-
-                  <MenuItem className={classes.menue}>salad</MenuItem>
-                  <MenuItem className={classes.menue}>burgers</MenuItem>
-                  <MenuItem className={classes.menue}>Pastries</MenuItem>
-                  <MenuItem className={classes.menue}>Sandwiches </MenuItem>
-                  <MenuItem className={classes.menue}>Drinks</MenuItem>
-                  <MenuItem className={classes.menue}>Soup</MenuItem>
-                  <MenuItem className={classes.menue}>Sea food</MenuItem>
-                  <MenuItem className={classes.menue}>Deserts </MenuItem>
-                </Grid>
-
-                <Grid className='menubar2'>
-                  <text className='type'>Eating time:</text>
-                  <text className='line2'>_______________</text>
-                  <MenuItem className={classes.menue}>breakfast</MenuItem>
-                  <MenuItem className={classes.menue}>dinner</MenuItem>
-                  <MenuItem className={classes.menue}>lunch</MenuItem>
-                  <MenuItem className={classes.menue}>snaks</MenuItem>{' '}
-                  <text className='type'>Time needed:</text>
-                  <text className='line3'>_________________</text>
-                  <MenuItem className={classes.menue}>15 min</MenuItem>
-                  <MenuItem className={classes.menue}>30 min</MenuItem>
-                  <MenuItem className={classes.menue}>An hour</MenuItem>
-                </Grid>
-
-                <Grid className='menubar3'>
-                  <text className='type'>Occasions:</text>
-                  <text className='line2'>_____________</text>
-                  <MenuItem className={classes.menue}>Ramadan</MenuItem>
-                  <MenuItem className={classes.menue}>Birthdays</MenuItem>
-                  <MenuItem className={classes.menue}>Christmas</MenuItem>
-                  <MenuItem className={classes.menue}>Picnic</MenuItem>{' '}
-                  <MenuItem className={classes.menue}>Eid</MenuItem>{' '}
-                </Grid>
-                <Grid className='menubar4'>
-                  <text className='type'>Area:</text>
-                  <text className='line2'>_________</text>
-                  <MenuItem className={classes.menue}>Western</MenuItem>
-                  <MenuItem className={classes.menue}>Eastern</MenuItem>
-                  <MenuItem className={classes.menue}>Asian </MenuItem>
-                  <text className='type'>Vegan :</text>
-                  <text className='line4'>_________</text>
-                  <MenuItem className={classes.menue}>for Vegans</MenuItem>
-                </Grid>
-              </Menu>
-
-              <img src={add} className='add' />
-
-              <Link className='LinkCategories'>AddMeal</Link>
-
-              <Grid>
-                <img src={chef} className='chef' />
-                <Menu
-                  id='menu-appbar'
-                  anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'right'
-                  }}
-                >
-                  <MenuItem>
-                    <img src={chefblack} className='chefblack' />
-                    User name
-                  </MenuItem>
-                  <MenuItem>
-                    <img src={savedFull} className='chefblack' />
-                    saved recipes
-                  </MenuItem>
-                  <MenuItem>
-                    <img src={recipe} className='chefblack' />
-                    My recipes
-                  </MenuItem>
-                  <MenuItem>
-                    <img src={calendar} className='chefblack' />
-                    Cooking Schedule
-                  </MenuItem>
-                  <MenuItem>
-                    <img src={logout} className='chefblack' />
-                    Log out
-                  </MenuItem>
-                </Menu>
-              </Grid>
-            </Toolbar>
-          </AppBar>
-        </ThemeProvider>
         <h1>hk</h1>
 
         <Card {...defaultProps} className='cardAddMeal'>
@@ -453,8 +316,8 @@ class AddMeal extends Component {
               color='default'
               name='veg'
               onChange={this.handleChange}
-              value='Veg'
-              checked={this.state.veg === 'Veg'}
+              value='yes'
+              checked={this.state.veg === 'yes'}
               required
             />
             <text>meat meal</text>
@@ -462,8 +325,8 @@ class AddMeal extends Component {
               color='default'
               name='veg'
               onChange={this.handleChange}
-              value='non-veg'
-              checked={this.state.veg === 'non-veg'}
+              value='no'
+              checked={this.state.veg === 'no '}
               required
             />
             <text>lean meal</text>
@@ -676,7 +539,7 @@ class AddMeal extends Component {
             <Grid className='Occasions1'>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='Birthday'
                 size='small'
                 checked={this.state.checked}
@@ -686,7 +549,7 @@ class AddMeal extends Component {
               <text className='OccasionsText'>Birthday</text>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='Picnic'
                 size='small'
                 checked={this.state.checked}
@@ -698,7 +561,7 @@ class AddMeal extends Component {
             <Grid className='Occasions2'>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='ThanksGiving'
                 size='small'
                 checked={this.state.checked}
@@ -708,7 +571,7 @@ class AddMeal extends Component {
               <text className='OccasionsText'>Thanksgiving</text>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='Eid'
                 size='small'
                 checked={this.state.checked}
@@ -720,7 +583,7 @@ class AddMeal extends Component {
             <Grid className='Occasions3'>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='Ramadan'
                 size='small'
                 checked={this.state.checked}
@@ -730,7 +593,7 @@ class AddMeal extends Component {
               <text className='OccasionsText'>Ramadan</text>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='foodParty'
                 size='small'
                 checked={this.state.checked}
@@ -742,7 +605,7 @@ class AddMeal extends Component {
             <Grid className='Occasions4'>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='Entertaining'
                 size='small'
                 checked={this.state.checked}
@@ -752,7 +615,7 @@ class AddMeal extends Component {
               <text className='OccasionsText'>Entertaining</text>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='Camping'
                 size='small'
                 checked={this.state.checked}
@@ -764,7 +627,7 @@ class AddMeal extends Component {
             <Grid className='Occasions5'>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='Chritmas'
                 size='small'
                 checked={this.state.checked}
@@ -774,7 +637,7 @@ class AddMeal extends Component {
               <text className='OccasionsText'>Christmas</text>
               <Checkbox
                 color='default'
-                inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
+                inputProps={{ 'aria-label': 'uncontrolled' }}
                 name='None'
                 size='small'
                 checked={this.state.checked}

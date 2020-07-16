@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { db, firebase } from '../../firebase';
 
 import { AppBar, Toolbar, Grid } from '@material-ui/core';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -87,8 +88,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ChefBar = () => {
-  let history = useHistory();
-
+  const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -108,28 +108,40 @@ const ChefBar = () => {
   const handleClose2 = () => {
     setAnchorEl(null);
   };
-  function handleClick() {
+  const handleClick = () => {
     history.push('/addmeal');
-  }
+  };
 
-  function handleClick2() {
-    console.log('working');
-    history.push('/mymeal');
-  }
+  const handleCloseLogOut = () => {
+    setAnchorEl(null);
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        history.push('/signin');
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+  };
   return (
     <Grid className='ExploreContaner'>
       <ThemeProvider theme={theme}>
         <AppBar color='primary'>
           <Toolbar>
             <Grid>
-              <img src={logo} className='Logo' />
+              <img
+                src={logo}
+                className='Logo'
+                onClick={() => history.push('/homelogged')}
+              />
             </Grid>
             <div className={classes.search}>
               <div className={classes.searchIcon}>
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder='Search…'
+                placeholder='Search by ingredients..'
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput
@@ -283,12 +295,8 @@ const ChefBar = () => {
                   <img src={chefblack} className='chefblack' />
                   User name
                 </MenuItem>
-                <MenuItem onClick={handleClick2} onClick={handleClose}>
-                  <img
-                    src={savedFull}
-                    className='chefblack'
-                    onClick={handleClick2}
-                  />
+                <MenuItem onClick={handleClose}>
+                  <img src={savedFull} className='chefblack' />
                   saved recipes
                 </MenuItem>
                 <MenuItem onClick={handleClose}>

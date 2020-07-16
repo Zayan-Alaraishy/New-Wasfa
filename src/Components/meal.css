@@ -41,9 +41,9 @@
   color:#6b6b76;
   background-color: white;
   font-size: 20px;
-  float: left;
-  margin-top: 90px;
-  margin-left:-205px;
+position: absolute;
+left:40px; 
+top:170px;
 }
 .IngredientsH{
   color:#3a3a3a;
@@ -57,9 +57,9 @@
 .Ingredients{
   color:#3a3a3a;
   font-size: 20px;
-  float: left;
-  margin-left: -140px;
-  margin-top: 120px;
+  position: absolute;
+  margin-left: 45px;
+  top:305px;
 
 }
 
@@ -68,32 +68,17 @@
   font-weight: bold;
   font-size: 25px;
   float: left;
-  margin-left: -565px;
-  margin-top: 180px;
+  margin-left: -143px;
+  margin-top: 170px;
 }
 .Recipe{
   color:#3a3a3a;
   font-size: 20px;
-  float: left;
-  margin-left: -80px;
-  margin-top: 50px;
+  position: absolute;
+  margin-left: 45px;
+  top:395px;
 }
 
-.type{
-  color:#3a3a3a;
-  font-weight: bold;
-  font-size: 20px;
-  float: left;
-  margin-left: 100px;
-  margin-top: 110px;
-}
-
-.typep{
-  color:#3a3a3a;
-  font-weight: normal;
-  margin-top: -24px;
-  margin-left: 100px;
-}
 .time{
   color:#3a3a3a;
   font-weight: bold;
@@ -128,31 +113,59 @@
 .Area{
   color:#3a3a3a;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   float: left;
-  margin-left: 977px;
-  margin-top: -15px;
+  padding-left: 1034px;
 }
 .Areap{
   font-weight: normal;
-  margin-top: -24px;
-  margin-left: 150px;
+  margin-top: -21px;
+  margin-left: 160px;
 
 }
 
-.Time{
+.type{
   color:#3a3a3a;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 18px;
   float: left;
-  margin-left: 1015px;
-  margin-top: -15px;
-  padding-bottom: 20px;
+  padding-left: 1007px;
+
 }
 
-.Timep{
+.typep{
+  color:#3a3a3a;
   font-weight: normal;
-  margin-top: -24px;
-  margin-left: 110px;
+  margin-top: -21px;
+  margin-left: 160px;
+}
+.veg{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 18px;
+  float: left;
+  padding-left: 1077px;
+  padding-top: 0px;
+}
+.vegp{
+  color:#3a3a3a;
+  font-weight: normal;
+  margin-top: -21px;
+  margin-left: 160px;
+}
+.time{
+  color:#3a3a3a;
+  font-weight: bold;
+  font-size: 18px;
+  float: left;
+  padding-left: 0px;
+  padding-top: 100px;
+}
+
+.timep{
+  color:#3a3a3a;
+  font-weight: normal;
+  margin-top: -21px;
+  margin-left: 160px;
 
 }

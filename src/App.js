@@ -10,47 +10,42 @@ import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
 import Meal from './Components/meals';
 import Save from './Components/Logged/saved';
-import { AuthProvider } from './Auth';
 
 import HomeLogged from './Components/Logged/homeLogged';
+import { AuthProvider } from './Auth';
+import PrivateRoute from './PrivateRoute';
+
 import MyMeals from './Components/Cheif/MyMeals';
 function App() {
   return (
-    <Router history={history}>
-      <div className='App'>
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/explore' component={Explore}>
-            <Explore />
-          </Route>
-          <Route path='/addmeal'>
-            <AddMeal />
-          </Route>
-          <Route path='mymeals' component={MyMeals} />
+    <AuthProvider>
+      <Router history={history}>
+        <div className='App'>
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route path='/explore' component={Explore}>
+              <Explore />
+            </Route>
+            <PrivateRoute path='/addmeal' component={AddMeal} />
+            <PrivateRoute path='/myMeals' component={MyMeals} />
 
-          <Route path='/tutorial'>
-            <Tutorial />
-          </Route>
-          <Route path='/signup'>
-            <SignUp />
-          </Route>
-          <Route path='/signin'>
-            <SignInSide />
-          </Route>
-          <Route path='/homelogged'>
-            <HomeLogged />
-          </Route>
-          <Route path='/meal'>
-            <Meal />
-          </Route>
-          <Route path='/save'>
-            <Save />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+            <Route path='/tutorial'>
+              <Tutorial />
+            </Route>
+            <Route path='/signup'>
+              <SignUp />
+            </Route>
+            <Route path='/signin'>
+              <SignInSide />
+            </Route>
+            <PrivateRoute path='/homelogged' component={HomeLogged} />
+            <Route path='/meal/:id' component={Meal} />
+          </Switch>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 export default App;

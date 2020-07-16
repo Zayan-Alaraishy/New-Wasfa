@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { Redirect } from 'react-router';
+import { AuthContext } from '../../Auth';
 import clsx from 'clsx';
 import {
   Grid,
@@ -18,7 +20,6 @@ import {
 import { ThemeProvider } from '@material-ui/styles';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-
 import Pan from '../images/pan2.png';
 import { firebase } from '../../firebase';
 import './signup.css';
@@ -68,7 +69,7 @@ const theme = createMuiTheme({
 });
 
 export default function SignInSide() {
-  let history = useHistory();
+  const history = useHistory();
   function handleClick() {
     history.push('/signup');
   }
@@ -91,6 +92,10 @@ export default function SignInSide() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggedType, setloggedType] = useState('');
+  const { currentUser } = useContext(AuthContext);
+  if (currentUser) {
+    return <Redirect to='/homelogged' />;
+  }
 
   const signin = () => {
     setloggedType('chef');
@@ -110,15 +115,7 @@ export default function SignInSide() {
             querySnapshot.forEach(doc => {
               // doc.data() is never undefined for query doc snapshots
               console.log(doc.id, ' => ', doc.data());
-              console.log(doc.data().userType);
-              setloggedType(doc.data().userType);
-              if (doc.data().userType == 'chef') {
-                // this.props.history.push('/chef');
-                console.log('to chef');
-              } else {
-                // this.props.history.push('/learner');
-                console.log('to learner');
-              }
+              history.push('/homelogged');
             });
           })
           .catch(function(error) {

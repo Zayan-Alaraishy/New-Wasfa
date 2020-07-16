@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+
 import clsx from 'clsx';
 import {
   Grid,
@@ -91,6 +92,8 @@ export default function SignUpSide() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
+  const [driveLink, setDriveLink] = useState('');
+
   const [type, setType] = useState('');
 
   const addUser = e => {
@@ -109,20 +112,10 @@ export default function SignUpSide() {
           .set({
             Email: email,
             Username: username,
-            userType: type
-          })
-          .then(docRef => {
-            if (type == 'chef') {
-              // this.props.history.push('/chef');
-              console.log('to chef');
-            } else {
-              // this.props.history.push('/learner');
-              console.log('to learner');
-            }
-          })
-          .catch(function(error) {
-            console.error('Error adding document: ', error);
+            userType: type,
+            ChefCV: driveLink
           });
+        history.push('/homelogged');
       })
 
       .catch(function(error) {
@@ -130,10 +123,34 @@ export default function SignUpSide() {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(error);
-        alert(errorCode);
         // ...
       });
   };
+
+  let chefCV;
+  if (type == 'chef') {
+    chefCV = (
+      <div className={classes.form} noValidate>
+        <TextField
+          variant='outlined'
+          margin='normal'
+          required
+          fullWidth
+          id='driveLink'
+          label='Drive link for your CV'
+          name='driveLink'
+          autoComplete='driveLink'
+          autoFocus
+          value={driveLink}
+          onChange={event => {
+            setDriveLink(event.target.value);
+          }}
+        />
+      </div>
+    );
+  } else {
+    chefCV = <div></div>;
+  }
 
   return (
     <ThemeProvider theme={theme}>
@@ -214,8 +231,7 @@ export default function SignUpSide() {
               type='radio'
               name='type'
               defaultValue='option1'
-              value='user'
-              value={username}
+              value='learner'
               onChange={event => {
                 setType(event.target.value);
               }}
@@ -237,6 +253,7 @@ export default function SignUpSide() {
             />
             <text>Chef</text>
           </Grid>
+          <div>{chefCV}</div>
 
           <Button
             className={clsx(classes.margin, classes.buttonField)}
