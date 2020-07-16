@@ -118,7 +118,9 @@ const LearnerBar = () => {
         // An error happened.
       });
   };
-
+  const push_saved = () => {
+    history.push('/save');
+  };
   return (
     <Grid className='ExploreContaner'>
       <ThemeProvider theme={theme}>
@@ -165,7 +167,7 @@ const LearnerBar = () => {
                 <img src={userblack} className='chefblack' />
                 Hello {name}
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={push_saved}>
                 <img src={savedFull} className='chefblack' />
                 saved recipes
               </MenuItem>

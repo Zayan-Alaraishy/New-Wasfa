@@ -12,7 +12,7 @@ import { Typography, Grid } from '@material-ui/core';
 import savedEmpty from '../images/savedEmpty.png';
 import star from '../images/star.png';
 import pizza from '../images/pizza.jpeg';
-
+import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
 import unschedule from '../images/unschedule.png';
 
 import { useHistory } from 'react-router-dom';
@@ -130,18 +130,12 @@ class MediaCard extends Component {
               </Grid>
               <Typography style={{ marginTop: 1 }}>
                 <CardActions className='Cardactions'>
-                  <IconButton className='expandOpen1'>
-                    <img
-                      alt='saveicone'
-                      className='saveCard'
-                      src={savedEmpty}
-                    />
-                  </IconButton>
                   <IconButton className='expandOpen2'>
                     <img
-                      alt='unscheduleicone'
+                      alt='saveicone'
                       className='unscheduleCard'
-                      src={unschedule}
+                      src={savedEmpty}
+                      onClick={() => this.getMealId(meal.id)}
                     />
                   </IconButton>
                 </CardActions>

@@ -11,6 +11,8 @@ import SignUp from './Components/Accounts/signup';
 import Meal from './Components/meals';
 import ChefRequests from './Components/Manager/chefsRequests';
 import Result from './Components/result';
+import Save from './Components/Logged/saved';
+
 import HomeLogged from './Components/Logged/homeLogged';
 import { AuthProvider } from './Auth';
 import PrivateRoute from './PrivateRoute';
@@ -31,7 +33,7 @@ function App() {
             <PrivateRoute path='/addmeal' component={AddMeal} />
             <PrivateRoute path='/myMeals' component={MyMeals} />
             <PrivateRoute path='/AdminHome' component={ChefRequests} />
-            <Route path='/result' component={Result} />
+            <Route path='/result/:search' component={Result} />
             <Route path='/tutorial'>
               <Tutorial />
             </Route>
@@ -43,6 +45,9 @@ function App() {
             </Route>
             <PrivateRoute path='/homelogged' component={HomeLogged} />
             <Route path='/meal/:id' component={Meal} />
+            <Route path='/save'>
+              <Save />
+            </Route>
           </Switch>
         </div>
       </Router>

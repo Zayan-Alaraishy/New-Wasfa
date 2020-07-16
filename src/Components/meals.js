@@ -36,9 +36,9 @@ class Meal extends Component {
   };
 
   componentDidMount() {
+    const { id } = this.props.match.params;
     const db = firebase.firestore();
     console.log(this.props);
-    const { id } = this.props.match.params;
     console.log('mealId', IDBCursor);
     const { meal } = this.state;
     let x = '';

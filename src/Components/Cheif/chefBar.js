@@ -92,6 +92,9 @@ const ChefBar = () => {
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  // const [categoryOpen, setCatrgoryOpen] = useState(false);
+  // const [profileOpen, setCatrgoryOpen] = useState(false);
+
   const [name, setName] = useState('');
   const [search, setSearch] = useState('');
 
@@ -141,26 +144,14 @@ const ChefBar = () => {
   const push_myRecipes = () => {
     history.push('/MyMeals');
   };
+  const push_saved = () => {
+    history.push('/save');
+  };
   const handleSearch = e => {
     if (e.key === 'Enter') {
       console.log(e.target.value);
       history.push(`/result/${e.target.value}`);
     }
-    // history.push(`/result/${search}`);
-
-    // const db=firebase.firestore()
-    // db.collection(meals).where('Ingredients', '>=', search)
-    // .get()
-    // .then((querySnapshot)=>{
-    //   querySnapshot.forEach((doc)=>{
-    //     const results = {
-    //       id: doc.id,
-    //       ...doc.data()
-    //     };
-    //     list.push(results);
-
-    //   })
-    // })
   };
   const handleCloseLogOut = () => {
     setAnchorEl(null);
@@ -350,7 +341,7 @@ const ChefBar = () => {
                   <img src={chefblack} className='chefblack' />
                   Chef {name}
                 </MenuItem>
-                <MenuItem>
+                <MenuItem onClick={push_saved}>
                   <img src={savedFull} className='chefblack' />
                   saved recipes
                 </MenuItem>
