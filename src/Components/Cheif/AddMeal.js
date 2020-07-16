@@ -255,7 +255,6 @@ class AddMeal extends Component {
         <ChefBar />
 
         <h1>hk</h1>
-
         <Card {...defaultProps} className='cardAddMeal'>
           <form noValidate autoComplete='off'>
             <TextField

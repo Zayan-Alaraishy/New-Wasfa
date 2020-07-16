@@ -30,6 +30,7 @@ export default function MyMeals() {
     console.log('The user id is =>' + uid);
 
     const db = firebase.firestore();
+    let list = [];
 
     db.collection('meals')
       .where('usid', '==', uid)
@@ -40,10 +41,12 @@ export default function MyMeals() {
             id: doc.id,
             ...doc.data()
           };
-          console.log(fetchedMealData);
-          meals.push(fetchedMealData);
-          console.log(meals);
+          list.push(fetchedMealData);
+          console.log(list);
+
+          // meals.push(fetchedMealData);
         });
+        setMeals(list);
       });
   }, []);
 
@@ -56,7 +59,6 @@ export default function MyMeals() {
     <div>
       <ChefBar />
       <h1> {''}}</h1>
-      <h1> my meals are </h1>
 
       {meals.map(meal => (
         <Card {...defaultProps} className='card'>

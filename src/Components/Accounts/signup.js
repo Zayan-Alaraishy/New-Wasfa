@@ -132,10 +132,9 @@ export default function SignUpSide() {
     chefCV = (
       <div className={classes.form} noValidate>
         <TextField
-          variant='outlined'
+          className={clsx(classes.margin, classes.textField)}
           margin='normal'
           required
-          fullWidth
           id='driveLink'
           label='Drive link for your CV'
           name='driveLink'

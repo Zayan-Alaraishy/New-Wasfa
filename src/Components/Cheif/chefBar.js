@@ -185,7 +185,7 @@ const ChefBar = () => {
                   Pastries
                 </MenuItem>
                 <MenuItem className={classes.menue} onClick={handleClose2}>
-                  Sandwiches{' '}
+                  Sandwiches
                 </MenuItem>
                 <MenuItem className={classes.menue} onClick={handleClose2}>
                   Drinks

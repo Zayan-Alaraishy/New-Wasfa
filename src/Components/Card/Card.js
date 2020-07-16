@@ -11,12 +11,6 @@ import { Typography, Grid } from '@material-ui/core';
 
 import savedEmpty from '../images/savedEmpty.png';
 import star from '../images/star.png';
-import pizza from '../images/pizza.jpeg';
-import TurnedInNotIcon from '@material-ui/icons/TurnedInNot';
-import unschedule from '../images/unschedule.png';
-import { withRouter } from 'react-router-dom';
-
-import { useHistory } from 'react-router-dom';
 
 const defaultProps = {
   style: {
