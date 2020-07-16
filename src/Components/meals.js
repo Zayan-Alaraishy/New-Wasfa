@@ -103,15 +103,7 @@ class Meal extends Component {
         <img className='MealShape2' src={item.image} />
         <Grid className='chefby'>
           <h className='MealName'>{item.mealName}</h>
-
           <h className='by'>by: {chefName}</h>
-        </Grid>
-        <Grid className='starts'>
-          <img className='stary' src={stary} />
-          <img className='stary' src={stary} />
-          <img className='stary' src={stary} />
-          <img className='stary' src={stary} />
-          <img className='stary' src={stary} />
         </Grid>
         <h className='IngredientsH'>Ingredients:</h>
         <p className='Ingredients'>{item.Ingredients}</p>

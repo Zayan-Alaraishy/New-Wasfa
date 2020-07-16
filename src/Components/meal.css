@@ -50,8 +50,8 @@ top:170px;
   font-weight: bold;
   font-size: 25px;
   float: left;
-  margin-left: -125px;
-  margin-top: 80px;
+  margin-left: -215px;
+  margin-top: 130px;
 
 }
 .Ingredients{
@@ -59,41 +59,28 @@ top:170px;
   font-size: 20px;
   position: absolute;
   margin-left: 45px;
-  top:305px;
+  top:225px;
 
 }
-
 .RecipeH{
   color:#3a3a3a;
   font-weight: bold;
   font-size: 25px;
   float: left;
-  margin-left: -143px;
-  margin-top: 170px;
+  margin-left: -215px;
+  margin-top: 220px;
 }
 .Recipe{
   color:#3a3a3a;
   font-size: 20px;
   position: absolute;
   margin-left: 45px;
-  top:395px;
+  top:320px;
+  width: 360px;
+
 }
 
-.time{
-  color:#3a3a3a;
-  font-weight: bold;
-  font-size: 20px;
-  float: left;
-  margin-left: 980px;
-  margin-top: -10px;
-}
 
-.timep{
-  color:#3a3a3a;
-  font-weight: normal;
-  margin-top: -24px;
-  margin-left: 208px;
-}
 
 .Occasions{
   color:#3a3a3a;
@@ -115,7 +102,11 @@ top:170px;
   font-weight: bold;
   font-size: 18px;
   float: left;
-  padding-left: 1034px;
+  padding-left: 442px;
+  padding-top: 55px;
+  padding-bottom: 355px;
+  padding-right:300px;
+
 }
 .Areap{
   font-weight: normal;
@@ -128,9 +119,9 @@ top:170px;
   color:#3a3a3a;
   font-weight: bold;
   font-size: 18px;
-  float: left;
-  padding-left: 1007px;
-
+  position: absolute;
+ top:310px;
+ left:605px;
 }
 
 .typep{
@@ -143,22 +134,24 @@ top:170px;
   color:#3a3a3a;
   font-weight: bold;
   font-size: 18px;
-  float: left;
-  padding-left: 1077px;
-  padding-top: 0px;
+  position: absolute;
+top:230px;
+left: 720px;
 }
 .vegp{
   color:#3a3a3a;
   font-weight: normal;
-  margin-top: -21px;
-  margin-left: 160px;
+  position: absolute;
+  top:-19px;
+  left: 120px;
+
 }
 .time{
   color:#3a3a3a;
   font-weight: bold;
   font-size: 18px;
   float: left;
-  padding-left: 0px;
+  padding-left: 400px;
   padding-top: 100px;
 }
 
@@ -166,6 +159,6 @@ top:170px;
   color:#3a3a3a;
   font-weight: normal;
   margin-top: -21px;
-  margin-left: 160px;
+  margin-left: 190px;
 
 }

@@ -9,11 +9,7 @@ class ChefRequests extends Component {
     const db = firebase.firestore();
   }
   render() {
-    return (
-      <div>
-        <ManagerBar />
-      </div>
-    );
+    return <div>Hello Admin </div>;
   }
 }
 

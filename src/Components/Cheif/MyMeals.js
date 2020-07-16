@@ -59,7 +59,17 @@ export default function MyMeals() {
   return (
     <div>
       <ChefBar />
-      <h1> {''}}</h1>
+      <h2
+        style={{
+          marginTop: 80,
+          textAlign: 'left',
+          marginLeft: 60,
+          marginBottom: 8,
+          fontFamily: 'arial'
+        }}
+      >
+        My recipes
+      </h2>
 
       {meals.map(meal => (
         <Card {...defaultProps} className='card'>

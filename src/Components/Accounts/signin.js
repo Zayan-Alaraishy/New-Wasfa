@@ -115,7 +115,11 @@ export default function SignInSide() {
             querySnapshot.forEach(doc => {
               // doc.data() is never undefined for query doc snapshots
               console.log(doc.id, ' => ', doc.data());
-              history.push('/homelogged');
+              if (doc.data().userType == 'admin') {
+                history.push('/AdminHome');
+              } else {
+                history.push('/homelogged');
+              }
             });
           })
           .catch(function(error) {

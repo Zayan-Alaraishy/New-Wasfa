@@ -10,7 +10,8 @@ import SignInSide from './Components/Accounts/signin';
 import SignUp from './Components/Accounts/signup';
 import Meal from './Components/meals';
 import Save from './Components/Logged/saved';
-
+import ChefRequests from './Components/Manager/chefsRequests';
+import Result from './Components/result';
 import HomeLogged from './Components/Logged/homeLogged';
 import { AuthProvider } from './Auth';
 import PrivateRoute from './PrivateRoute';
@@ -30,7 +31,10 @@ function App() {
             </Route>
             <PrivateRoute path='/addmeal' component={AddMeal} />
             <PrivateRoute path='/myMeals' component={MyMeals} />
+            <PrivateRoute path='/saved' component={Save} />
 
+            <PrivateRoute path='/AdminHome' component={ChefRequests} />
+            <Route path='/result' component={Result} />
             <Route path='/tutorial'>
               <Tutorial />
             </Route>

@@ -6,7 +6,8 @@ import CardActions from '@material-ui/core/CardActions';
 import { Typography, Grid } from '@material-ui/core';
 import CardMedia from '@material-ui/core/CardMedia';
 import IconButton from '@material-ui/core/IconButton';
-
+import LearnerBar from '../Logged/learnerBar';
+import ChefBar from '../Cheif/chefBar';
 import savedEmpty from '../images/savedEmpty.png';
 import star from '../images/star.png';
 import { db, firebase } from '../../firebase';
@@ -74,16 +75,53 @@ class Save extends Component {
           });
         });
     });
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User logged in already or has just logged in.
+        console.log(user.uid);
+        db.collection('users')
+          .doc(user.uid)
+          .get()
+          .then(doc => {
+            console.log(doc.data());
+            const fetchedType = doc.data().userType;
+            console.log(fetchedType);
+            if (fetchedType == 'chef') {
+              this.setState({ chef: true });
+            } else {
+            }
+          });
+      } else {
+        // User not logged in or has just logged out.
+      }
+    });
   }
 
   learnMore = clickedMealId => {
     this.props.history.push('/meal', { id: clickedMealId });
   };
   render() {
+    let bar;
+    if (this.state.chef) {
+      bar = (
+        <div>
+          <ChefBar {...this.props} />
+        </div>
+      );
+    } else {
+      bar = (
+        <div>
+          <LearnerBar {...this.props} />
+        </div>
+      );
+    }
     const { favMeals } = this.state;
     console.log(this.state.favMeals);
     return (
       <div>
+        <h1>gh</h1>
+        <div>{bar}</div>
+
         {favMeals.map(meal => (
           <Card borderRadius='50%' {...defaultProps} className='card'>
             <CardActionArea className='area'>
@@ -93,13 +131,7 @@ class Save extends Component {
                 onClick={() => this.learnMore(meal.id)}
               />
               <h1 className='Cardtitle'>{meal.mealName}</h1>
-              <Grid className='starsCard'>
-                <img alt='star' className='Cardstar' src={star} />
-                <img alt='star' className='Cardstar' src={star} />
-                <img alt='star' className='Cardstar' src={star} />
-                <img alt='star' className='Cardstar' src={star} />
-                <img alt='star' className='Cardstar' src={star} />
-              </Grid>
+
               <Typography>
                 <CardActions className='Cardactions'>
                   <IconButton className='expandOpen2'>

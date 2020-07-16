@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import { AppBar, Toolbar, Grid } from '@material-ui/core';
@@ -9,6 +9,7 @@ import Menu from '@material-ui/core/Menu';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
+import { AuthContext } from '../../Auth';
 
 import logo from '../images/logo2.png';
 import user from '../images/user.png';
@@ -88,9 +89,24 @@ const LearnerBar = () => {
   const classes = useStyles();
   const history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [search, setSearch] = useState('');
 
   const [catergoryOpen, setCategoryOpen] = React.useState(false);
   const [profileOpen, setProfileOpen] = React.useState(false);
+
+  const { currentUser } = useContext(AuthContext);
+  const [name, setName] = useState('');
+
+  useEffect(() => {
+    const db = firebase.firestore();
+    db.collection('users')
+      .doc(currentUser.uid)
+      .get()
+      .then(doc => {
+        console.log(doc.data().Username);
+        setName(doc.data().Username);
+      });
+  });
 
   const handleMenu = event => {
     setProfileOpen(true);
@@ -113,19 +129,27 @@ const LearnerBar = () => {
     setAnchorEl(null);
     console.log('working');
   };
-  const handleCloseLogOut = () => {
-    setAnchorEl(null);
+
+  const handleLogOut = () => {
     firebase
       .auth()
       .signOut()
       .then(function() {
-        history.push('/signin');
+        // Sign-out successful.
       })
       .catch(function(error) {
         // An error happened.
       });
   };
-
+  const push_saved = () => {
+    history.push('/saved');
+  };
+  const handleSearch = e => {
+    if (e.key === 'Enter') {
+      console.log(e.target.value);
+      history.push(`/result/${e.target.value}`);
+    }
+  };
   return (
     <Grid className='ExploreContaner'>
       <ThemeProvider theme={theme}>
@@ -139,12 +163,19 @@ const LearnerBar = () => {
                 <SearchIcon />
               </div>
               <InputBase
-                placeholder='Search…'
+                placeholder='Search by ingredients..'
                 classes={{
                   root: classes.inputRoot,
                   input: classes.inputInput
                 }}
                 inputProps={{ 'aria-label': 'search' }}
+                value={search}
+                onChange={event => {
+                  setSearch(event.target.value);
+                  console.log(event.target.value);
+                  // this.props.history.push(`/result/${event.target.value}`);
+                }}
+                onKeyDown={handleSearch}
               />
             </div>
             <Grid xs={9} sm={8} />
@@ -284,18 +315,14 @@ const LearnerBar = () => {
             >
               <MenuItem onClick={handleClose}>
                 <img src={userblack} className='chefblack' />
-                User name
+                Hello {name}
               </MenuItem>
-              <MenuItem onClick={handleClose}>
+              <MenuItem onClick={push_saved} onClick={handleClose}>
                 <img src={savedFull} className='chefblack' />
                 saved recipes
               </MenuItem>
 
-              <MenuItem onClick={handleClose}>
-                <img src={calendar} className='chefblack' />
-                Cooking Schedule
-              </MenuItem>
-              <MenuItem onClick={handleCloseLogOut}>
+              <MenuItem onClick={handleLogOut}>
                 <img src={logout} className='chefblack' />
                 Log out
               </MenuItem>
