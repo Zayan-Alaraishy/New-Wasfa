@@ -66,7 +66,7 @@ const Explore = () => {
       >
         recipes:
       </h1>
-      <Card />
+      <Card history={history} />
     </Grid>
   );
 };

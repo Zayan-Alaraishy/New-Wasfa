@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Card.css';
 import { db, firebase } from '../../firebase';
+import Rating from '@material-ui/lab/Rating';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -26,7 +27,8 @@ class MediaCard extends Component {
     meals: [],
     uid: '',
     mealId: '',
-    favMeals: []
+    favMeals: [],
+    value: 0
   };
 
   componentDidMount() {
@@ -116,16 +118,17 @@ class MediaCard extends Component {
                 onClick={() => this.learnMore(meal.id)}
               />
               <h1 className='Cardtitle'>{meal.mealName}</h1>
-              <Grid className='starsCard'>
-                <img alt='star' className='Cardstar' src={star} />
-                <img alt='star' className='Cardstar' src={star} />
-                <img alt='star' className='Cardstar' src={star} />
-                <img alt='star' className='Cardstar' src={star} />
-                <img alt='star' className='Cardstar' src={star} />
-              </Grid>
+              <Grid className='starsCard'></Grid>
               <Typography style={{ marginTop: 1 }}>
                 <CardActions className='Cardactions'>
                   <IconButton className='expandOpen2'>
+                    {/* <Rating
+                      name='simple-controlled'
+                      value={this.state.value}
+                      onChange={newValue => {
+                        this.setState({ value: newValue });
+                      }}
+                    /> */}
                     <img
                       alt='saveicone'
                       className='unscheduleCard'

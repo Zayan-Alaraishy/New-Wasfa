@@ -91,22 +91,29 @@ const ChefBar = () => {
   const history = useHistory();
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
+  const [catergoryOpen, setCategoryOpen] = React.useState(false);
+  const [profileOpen, setProfileOpen] = React.useState(false);
 
   const handleMenu = event => {
+    setProfileOpen(true);
     setAnchorEl(event.currentTarget);
   };
+
   const handleMenu2 = event => {
+    setCategoryOpen(true);
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
+    setProfileOpen(false);
     setAnchorEl(null);
     console.log('working');
-    history.push('/mymeals');
   };
+
   const handleClose2 = () => {
+    setCategoryOpen(false);
     setAnchorEl(null);
+    console.log('working');
   };
   const handleClick = () => {
     history.push('/addmeal');
@@ -168,7 +175,7 @@ const ChefBar = () => {
                 vertical: 'bottom',
                 horizontal: 'right'
               }}
-              open={open}
+              open={catergoryOpen}
               onClose={handleClose2}
             >
               <Grid>
@@ -288,7 +295,7 @@ const ChefBar = () => {
                   vertical: 'top',
                   horizontal: 'right'
                 }}
-                open={open}
+                open={profileOpen}
                 onClose={handleClose}
               >
                 <MenuItem onClick={handleClose}>

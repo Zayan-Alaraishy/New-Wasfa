@@ -1,15 +1,14 @@
-import React, { Component, useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { firebase } from '../../firebase';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
-import { Typography, Grid } from '@material-ui/core';
-import star from '../images/star.png';
+import { Typography } from '@material-ui/core';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import IconButton from '@material-ui/core/IconButton';
+import { useHistory } from 'react-router-dom';
 
 import savedEmpty from '../images/savedEmpty.png';
-import unschedule from '../images/unschedule.png';
 import { AuthContext } from '../../Auth';
 import ChefBar from './chefBar';
 
@@ -22,6 +21,8 @@ const defaultProps = {
   }
 };
 export default function MyMeals() {
+  let history = useHistory();
+
   const { currentUser } = useContext(AuthContext);
   const [meals, setMeals] = useState([]);
   const [uid, setUid] = useState(currentUser.uid);
@@ -52,7 +53,7 @@ export default function MyMeals() {
 
   const learnMore = clickedMealId => {
     console.log(clickedMealId);
-    this.props.history.push('/meal', { id: clickedMealId });
+    history.push(`/meal/${clickedMealId}`);
   };
   console.log(meals);
   return (
@@ -63,7 +64,11 @@ export default function MyMeals() {
       {meals.map(meal => (
         <Card {...defaultProps} className='card'>
           <CardActionArea className='area'>
-            <CardMedia className='CardImage' image={meal.image} />
+            <CardMedia
+              className='CardImage'
+              image={meal.image}
+              onClick={() => learnMore(meal.id)}
+            />
             <h1 className='Cardtitle'>{meal.mealName}</h1>
 
             <Typography>

@@ -20,30 +20,6 @@ class Meal extends Component {
   };
 
   componentDidMount() {
-    const db = firebase.firestore();
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        // User logged in already or has just logged in.
-        console.log(user.uid);
-        db.collection('users')
-          .doc(user.uid)
-          .get()
-          .then(doc => {
-            console.log(doc.data());
-            const fetchedType = doc.data().userType;
-            console.log(fetchedType);
-            if (fetchedType == 'chef') {
-              this.setState({ chef: true });
-            } else {
-            }
-          });
-      } else {
-        // User not logged in or has just logged out.
-      }
-    });
-  }
-
-  componentDidMount() {
     const { id } = this.props.match.params;
     const db = firebase.firestore();
     console.log(this.props);
@@ -79,6 +55,27 @@ class Meal extends Component {
           });
       })
       .then(() => {});
+
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        // User logged in already or has just logged in.
+        console.log(user.uid);
+        db.collection('users')
+          .doc(user.uid)
+          .get()
+          .then(doc => {
+            console.log(doc.data());
+            const fetchedType = doc.data().userType;
+            console.log(fetchedType);
+            if (fetchedType == 'chef') {
+              this.setState({ chef: true });
+            } else {
+            }
+          });
+      } else {
+        // User not logged in or has just logged out.
+      }
+    });
   }
   render() {
     let bar;
@@ -95,7 +92,7 @@ class Meal extends Component {
         </div>
       );
     }
-    const { meal: item, chefName, chef, space } = this.state;
+    const { meal: item, chefName, chef } = this.state;
     console.log(this.state.meal);
     console.log(chef);
     return (
@@ -124,9 +121,7 @@ class Meal extends Component {
         <h className='time'>
           Eating time: <p className='timep'> {item.TimeToEat}</p>
         </h>
-        {/* {/* <h className='Occasions'>
-          Occasions: <p className='Occasionsp'>{item.occasions}</p>
-        </h> */}
+
         <h className='Area'>
           Area: <p className='Areap'>{item.region}</p>
         </h>
