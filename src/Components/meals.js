@@ -26,6 +26,7 @@ const theme = createMuiTheme({
 class Meal extends Component {
   state = {
     meal: {},
+
     vegetarian: null,
     chefId: '',
     chefName: '',
@@ -36,18 +37,20 @@ class Meal extends Component {
 
   componentDidMount() {
     const db = firebase.firestore();
-
-    const { state } = this.props.history.location;
-    console.log('mealId', state.id);
+    console.log(this.props);
+    const { id } = this.props.match.params;
+    console.log('mealId', IDBCursor);
     const { meal } = this.state;
+    let x = '';
     let me = this;
     db.collection('meals')
-      .doc(state.id)
+      .doc(id)
       .get()
       .then(doc => {
         console.log(doc.data());
         const chefId = doc.data().usid;
-        console.log(chefId);
+        x = chefId;
+        console.log(chefId, 'id');
         this.setState({ chefId: chefId });
         this.setState({ meal: doc.data() });
         const vegetarian = doc.data().veg;
@@ -60,40 +63,39 @@ class Meal extends Component {
       })
       .then(doc => {
         db.collection('users')
-          .doc(this.state.chefId)
+          .doc(x)
           .get()
           .then(doc => {
-            console.log(doc.data());
+            console.log(doc.data(), 'hhhhh');
             this.setState({ chefName: doc.data().Username });
           });
       })
       .then(() => {
-        firebase.auth().onAuthStateChanged(user => {
-          if (user) {
-            // User logged in already or has just logged in.
-            console.log(user.uid);
-            this.setState({ uid: user.uid });
-            console.log(this.state.uid);
-          } else {
-            // User not logged in or has just logged out.
-          }
-          console.log('The user id is =>' + this.state.uid);
-
-          const { userType } = this.state;
-          db.collection('users')
-            .doc(this.state.uid)
-            .get()
-            .then(doc => {
-              console.log(doc.data());
-              const fetchedType = doc.data().userType;
-              console.log(fetchedType);
-              if (fetchedType == 'cheif') {
-                this.setState({ chef: true });
-              } else {
-                //
-              }
-            });
-        });
+        // firebase.auth().onAuthStateChanged(user => {
+        //   if (user) {
+        //     // User logged in already or has just logged in.
+        //     console.log(user.uid);
+        //     this.setState({ uid: user.uid });
+        //     console.log(this.state.uid);
+        //   } else {
+        //     // User not logged in or has just logged out.
+        //   }
+        //   console.log('The user id is =>' + this.state.uid);
+        //   const { userType } = this.state;
+        //   db.collection('users')
+        //     .doc(this.state.uid)
+        //     .get()
+        //     .then(doc => {
+        //       console.log(doc.data());
+        //       const fetchedType = doc.data().userType;
+        //       console.log(fetchedType);
+        //       if (fetchedType == 'cheif') {
+        //         this.setState({ chef: true });
+        //       } else {
+        //         //
+        //       }
+        //     });
+        // });
       });
   }
   render() {

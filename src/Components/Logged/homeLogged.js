@@ -32,6 +32,7 @@ class HomeLogged extends Component {
     });
   }
   render() {
+    console.log('logged');
     let bar;
     if (this.state.chef) {
       bar = (
@@ -60,7 +61,7 @@ class HomeLogged extends Component {
           All recipes
         </h2>
         <div>{bar}</div>
-        <Card />
+        <Card {...this.props} />
       </div>
     );
   }

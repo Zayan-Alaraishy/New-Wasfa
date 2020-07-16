@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 
 import Card from '@material-ui/core/Card';
-import logo from '../images/logo.png';
+
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { AppBar, Toolbar, Grid, Button, Typography } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import InputBase from '@material-ui/core/InputBase';
+import SearchIcon from '@material-ui/icons/Search';
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
 
 import Radio from '@material-ui/core/Radio';
 import Checkbox from '@material-ui/core/Checkbox';
@@ -15,7 +21,17 @@ import TextField from '@material-ui/core/TextField';
 
 import './AddMeal.css';
 import { firebase } from '../../firebase';
+import { classes } from 'istanbul-lib-coverage';
 
+import logo from '../images/logo2.png';
+import chef from '../images/chef.png';
+import add from '../images/add.png';
+import chefblack from '../images/chefblack.png';
+import savedFull from '../images/savedFull.png';
+import recipe from '../images/recipe (1).png';
+import calendar from '../images/calendar.png';
+import logout from '../images/logout.png';
+import arrow from '../images/arrow.png';
 const useStyles = makeStyles(theme => ({
   root: {
     '& > *': {
@@ -209,32 +225,171 @@ class AddMeal extends Component {
     } = this.state;
 
     console.log(this.state);
-    db.collection('meals').add({
-      mealName: name,
-      Ingredients: contents,
-      recipe: recipe,
-      image: url,
-      usid: uid,
-      TimeToEat: eatTime,
-      Occasions: occasions,
-      region: region,
-      MealType: clasifiction
-    });
+    db.collection('meals')
+      .add({
+        mealName: name,
+        Ingredients: contents,
+        recipe: recipe,
+        image: url,
+        usid: uid,
+        TimeToEat: eatTime,
+        Occasions: occasions,
+        region: region,
+        MealType: clasifiction
+      })
+      .then(() => {
+        this.props.history.push('/myMeals');
+      });
   };
 
   render() {
+    // const handleMenu = event => {
+    //   setAnchorEl(event.currentTarget);
+    // };
+    // const handleMenu2 = event => {
+    //   setAnchorEl(event.currentTarget);
+    // };
+
+    // const handleClose = () => {
+    //   setAnchorEl(null);
+    // };
+    // const handleClose2 = () => {
+    //   setAnchorEl(null);
+    // };
+    // function handleClick() {
+    //   history.push('/addmeal');
+    // }
     return (
       <Grid className='AddMealContaner'>
         <ThemeProvider theme={theme}>
-          <AppBar position='static' color='primary'>
+          <AppBar color='primary'>
             <Toolbar>
               <Grid>
                 <img src={logo} className='Logo' />
               </Grid>
-              <Grid item sm={11} xs={6} />
+              <div className={classes.search}>
+                <div className={classes.searchIcon}>
+                  <SearchIcon />
+                </div>
+                <InputBase
+                  placeholder='Search…'
+                  classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput
+                  }}
+                  inputProps={{ 'aria-label': 'search' }}
+                />
+              </div>
+              <Grid xs={9} sm={8} />
+              <img src={arrow} className='Categories' />
+              <Link className='LinkCategories'>Categories</Link>
+
+              <Menu
+                className={classes.menue}
+                id='menu-appbar'
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right'
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right'
+                }}
+              >
+                <Grid>
+                  <text className='type'>Type:</text>
+                  <text className='line1'>_________</text>
+
+                  <MenuItem className={classes.menue}>salad</MenuItem>
+                  <MenuItem className={classes.menue}>burgers</MenuItem>
+                  <MenuItem className={classes.menue}>Pastries</MenuItem>
+                  <MenuItem className={classes.menue}>Sandwiches </MenuItem>
+                  <MenuItem className={classes.menue}>Drinks</MenuItem>
+                  <MenuItem className={classes.menue}>Soup</MenuItem>
+                  <MenuItem className={classes.menue}>Sea food</MenuItem>
+                  <MenuItem className={classes.menue}>Deserts </MenuItem>
+                </Grid>
+
+                <Grid className='menubar2'>
+                  <text className='type'>Eating time:</text>
+                  <text className='line2'>_______________</text>
+                  <MenuItem className={classes.menue}>breakfast</MenuItem>
+                  <MenuItem className={classes.menue}>dinner</MenuItem>
+                  <MenuItem className={classes.menue}>lunch</MenuItem>
+                  <MenuItem className={classes.menue}>snaks</MenuItem>{' '}
+                  <text className='type'>Time needed:</text>
+                  <text className='line3'>_________________</text>
+                  <MenuItem className={classes.menue}>15 min</MenuItem>
+                  <MenuItem className={classes.menue}>30 min</MenuItem>
+                  <MenuItem className={classes.menue}>An hour</MenuItem>
+                </Grid>
+
+                <Grid className='menubar3'>
+                  <text className='type'>Occasions:</text>
+                  <text className='line2'>_____________</text>
+                  <MenuItem className={classes.menue}>Ramadan</MenuItem>
+                  <MenuItem className={classes.menue}>Birthdays</MenuItem>
+                  <MenuItem className={classes.menue}>Christmas</MenuItem>
+                  <MenuItem className={classes.menue}>Picnic</MenuItem>{' '}
+                  <MenuItem className={classes.menue}>Eid</MenuItem>{' '}
+                </Grid>
+                <Grid className='menubar4'>
+                  <text className='type'>Area:</text>
+                  <text className='line2'>_________</text>
+                  <MenuItem className={classes.menue}>Western</MenuItem>
+                  <MenuItem className={classes.menue}>Eastern</MenuItem>
+                  <MenuItem className={classes.menue}>Asian </MenuItem>
+                  <text className='type'>Vegan :</text>
+                  <text className='line4'>_________</text>
+                  <MenuItem className={classes.menue}>for Vegans</MenuItem>
+                </Grid>
+              </Menu>
+
+              <img src={add} className='add' />
+
+              <Link className='LinkCategories'>AddMeal</Link>
+
+              <Grid>
+                <img src={chef} className='chef' />
+                <Menu
+                  id='menu-appbar'
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                >
+                  <MenuItem>
+                    <img src={chefblack} className='chefblack' />
+                    User name
+                  </MenuItem>
+                  <MenuItem>
+                    <img src={savedFull} className='chefblack' />
+                    saved recipes
+                  </MenuItem>
+                  <MenuItem>
+                    <img src={recipe} className='chefblack' />
+                    My recipes
+                  </MenuItem>
+                  <MenuItem>
+                    <img src={calendar} className='chefblack' />
+                    Cooking Schedule
+                  </MenuItem>
+                  <MenuItem>
+                    <img src={logout} className='chefblack' />
+                    Log out
+                  </MenuItem>
+                </Menu>
+              </Grid>
             </Toolbar>
           </AppBar>
         </ThemeProvider>
+        <h1>hk</h1>
 
         <Card {...defaultProps} className='cardAddMeal'>
           <form noValidate autoComplete='off'>
@@ -273,10 +428,17 @@ class AddMeal extends Component {
           </form>
 
           <Grid>
-            <button className='upload' onClick={this.handleUpload}>
+            <Button
+              variant='contained'
+              className='upload'
+              onClick={this.handleUpload}
+            >
               Upload
-            </button>
-            <CircularProgress variant='static' value={this.state.progress} />
+            </Button>
+            <Grid>
+              {' '}
+              <CircularProgress variant='static' value={this.state.progress} />
+            </Grid>
 
             <img src={this.state.url} height='200' width='auto' />
           </Grid>
@@ -378,6 +540,7 @@ class AddMeal extends Component {
           <text className='MealTypeText2'>Occasions:</text>
           <div class='vl'></div>
           <Grid className='gridMealType1'>
+            {' '}
             <Radio
               color='default'
               size='small'
@@ -390,8 +553,8 @@ class AddMeal extends Component {
               required
             />
             <text>salad</text>
-
             <Radio
+              className={classes.main}
               color='default'
               name='radio-button-demo'
               size='small'
@@ -518,7 +681,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>Birthday</text>
+              <text className='OccasionsText'>Birthday</text>
               <Checkbox
                 color='default'
                 inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
@@ -528,7 +691,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>Picnic</text>
+              <text className='OccasionsText'>Picnic</text>
             </Grid>
             <Grid className='Occasions2'>
               <Checkbox
@@ -540,7 +703,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>Thanksgiving</text>
+              <text className='OccasionsText'>Thanksgiving</text>
               <Checkbox
                 color='default'
                 inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
@@ -550,7 +713,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>Eid</text>
+              <text className='OccasionsText'>Eid</text>
             </Grid>
             <Grid className='Occasions3'>
               <Checkbox
@@ -562,7 +725,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>Ramadan</text>
+              <text className='OccasionsText'>Ramadan</text>
               <Checkbox
                 color='default'
                 inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
@@ -572,7 +735,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>party food</text>
+              <text className='OccasionsText'>party food</text>
             </Grid>
             <Grid className='Occasions4'>
               <Checkbox
@@ -584,7 +747,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>Entertaining</text>
+              <text className='OccasionsText'>Entertaining</text>
               <Checkbox
                 color='default'
                 inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
@@ -594,7 +757,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>Camping</text>
+              <text className='OccasionsText'>Camping</text>
             </Grid>
             <Grid className='Occasions5'>
               <Checkbox
@@ -606,7 +769,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>Christmas</text>
+              <text className='OccasionsText'>Christmas</text>
               <Checkbox
                 color='default'
                 inputProps={{ 'aria-label': 'uncontrolled-checkbox' }}
@@ -616,7 +779,7 @@ class AddMeal extends Component {
                 onChange={this.handleChangeCheckboxTime}
                 required
               />
-              <text>None</text>
+              <text className='OccasionsText'>None</text>
             </Grid>
           </Grid>
           <Button

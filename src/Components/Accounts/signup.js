@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 
 import clsx from 'clsx';
 import {
@@ -24,6 +23,8 @@ import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Pan from '../images/pan2.png';
 import { firebase } from '../../firebase';
 import './signup.css';
+import { useHistory } from 'react-router-dom';
+
 const defaultProps = {
   style: {
     width: '530px',
@@ -68,6 +69,10 @@ const theme = createMuiTheme({
 });
 
 export default function SignUpSide() {
+  let history = useHistory();
+  function handleClick() {
+    history.push('/signin');
+  }
   const classes = useStyles();
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
@@ -88,7 +93,6 @@ export default function SignUpSide() {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [driveLink, setDriveLink] = useState('');
-  const history = useHistory();
 
   const [type, setType] = useState('');
 
@@ -111,9 +115,7 @@ export default function SignUpSide() {
             userType: type,
             ChefCV: driveLink
           });
-        history.push('/homelogged').catch(function(error) {
-          console.error('Error adding document: ', error);
-        });
+        history.push('/homelogged');
       })
 
       .catch(function(error) {
@@ -121,7 +123,6 @@ export default function SignUpSide() {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(error);
-        alert(errorCode);
         // ...
       });
   };
@@ -230,8 +231,7 @@ export default function SignUpSide() {
               type='radio'
               name='type'
               defaultValue='option1'
-              value='user'
-              value={username}
+              value='learner'
               onChange={event => {
                 setType(event.target.value);
               }}
@@ -266,7 +266,7 @@ export default function SignUpSide() {
           </Button>
           <Grid>
             <Grid item>
-              <Link href='#' variant='body2'>
+              <Link onClick={handleClick} variant='body2'>
                 Have you already an account? Sign in
               </Link>
             </Grid>

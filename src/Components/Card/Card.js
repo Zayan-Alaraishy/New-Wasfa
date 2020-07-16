@@ -15,6 +15,8 @@ import pizza from '../images/pizza.jpeg';
 
 import unschedule from '../images/unschedule.png';
 
+import { useHistory } from 'react-router-dom';
+
 const defaultProps = {
   style: {
     width: '260px',
@@ -100,12 +102,14 @@ class MediaCard extends Component {
 
   learnMore = clickedMealId => {
     console.log(clickedMealId);
-    this.props.history.push('/meal', { id: clickedMealId });
+    this.props.history.push(`/meal/${clickedMealId}`);
   };
 
   render() {
     const { meals } = this.state;
     console.log(this.state.meals);
+    console.log(this.props);
+
     return (
       <div>
         {meals.map(meal => (
@@ -116,9 +120,7 @@ class MediaCard extends Component {
                 image={meal.image}
                 onClick={() => this.learnMore(meal.id)}
               />
-              <h1 className='Cardtitle' onClick={() => this.learnMore(meal.id)}>
-                {meal.mealName}
-              </h1>
+              <h1 className='Cardtitle'>{meal.mealName}</h1>
               <Grid className='starsCard'>
                 <img alt='star' className='Cardstar' src={star} />
                 <img alt='star' className='Cardstar' src={star} />

@@ -20,10 +20,11 @@ import {
 import { ThemeProvider } from '@material-ui/styles';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
-import { useHistory } from 'react-router-dom';
 import Pan from '../images/pan2.png';
 import { firebase } from '../../firebase';
 import './signup.css';
+import { useHistory } from 'react-router-dom';
+
 const defaultProps = {
   style: {
     width: '530px',
@@ -68,6 +69,10 @@ const theme = createMuiTheme({
 });
 
 export default function SignInSide() {
+  const history = useHistory();
+  function handleClick() {
+    history.push('/signup');
+  }
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -84,7 +89,6 @@ export default function SignInSide() {
   });
 
   const classes = useStyles();
-  let history = useHistory();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loggedType, setloggedType] = useState('');
@@ -111,8 +115,6 @@ export default function SignInSide() {
             querySnapshot.forEach(doc => {
               // doc.data() is never undefined for query doc snapshots
               console.log(doc.id, ' => ', doc.data());
-              console.log(doc.data().userType);
-              setloggedType(doc.data().userType);
               history.push('/homelogged');
             });
           })
@@ -209,8 +211,8 @@ export default function SignInSide() {
 
           <Grid>
             <Grid item>
-              <Link href='#' className='Do'>
-                Don't have an account? Sign in
+              <Link onClick={handleClick} className='Do'>
+                Don't have an account? Sign up
               </Link>
             </Grid>
           </Grid>

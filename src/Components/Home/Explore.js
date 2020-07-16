@@ -53,7 +53,6 @@ const Explore = () => {
           </Toolbar>
         </AppBar>
       </ThemeProvider>
-      {/* <text>Cheack our recipes :)</text> */}
       <h1
         style={{
           marginTop: 80,

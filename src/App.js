@@ -14,31 +14,37 @@ import HomeLogged from './Components/Logged/homeLogged';
 import { AuthProvider } from './Auth';
 import PrivateRoute from './PrivateRoute';
 
+import MyMeals from './Components/Cheif/MyMeals';
 function App() {
   return (
-    <Router history={history}>
-      <div className='App'>
-        <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/explore'>
-            <Explore />
-          </Route>
-          <PrivateRoute path='/addmeal' component={AddMeal} />
-          <Route path='/signup'>
-            <SignUp />
-          </Route>
-          <Route path='/signin'>
-            <SignInSide />
-          </Route>
-          <PrivateRoute path='/homelogged' component={HomeLogged} />
-          <Route path='/meal'>
-            <Meal />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <AuthProvider>
+      <Router history={history}>
+        <div className='App'>
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route path='/explore' component={Explore}>
+              <Explore />
+            </Route>
+            <PrivateRoute path='/addmeal' component={AddMeal} />
+            <PrivateRoute path='/myMeals' component={MyMeals} />
+
+            <Route path='/tutorial'>
+              <Tutorial />
+            </Route>
+            <Route path='/signup'>
+              <SignUp />
+            </Route>
+            <Route path='/signin'>
+              <SignInSide />
+            </Route>
+            <PrivateRoute path='/homelogged' component={HomeLogged} />
+            <Route path='/meal/:id' component={Meal} />
+          </Switch>
+        </div>
+      </Router>
+    </AuthProvider>
   );
 }
 export default App;
